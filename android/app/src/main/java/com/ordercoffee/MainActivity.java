@@ -1,4 +1,4 @@
-package com.milkteashopapp;
+package com.ordercoffee;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
@@ -12,7 +12,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "MilkTeaShopApp";
+    return "OrderCoffee";
   }
 
   @Override

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "MilkTeaShopApp.app"
-               BlueprintName = "MilkTeaShopApp"
-               ReferencedContainer = "container:MilkTeaShopApp.xcodeproj">
+               BuildableName = "OrderCoffee.app"
+               BlueprintName = "OrderCoffee"
+               ReferencedContainer = "container:OrderCoffee.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "MilkTeaShopAppTests.xctest"
-               BlueprintName = "MilkTeaShopAppTests"
-               ReferencedContainer = "container:MilkTeaShopApp.xcodeproj">
+               BuildableName = "OrderCoffeeTests.xctest"
+               BlueprintName = "OrderCoffeeTests"
+               ReferencedContainer = "container:OrderCoffee.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "MilkTeaShopApp.app"
-            BlueprintName = "MilkTeaShopApp"
-            ReferencedContainer = "container:MilkTeaShopApp.xcodeproj">
+            BuildableName = "OrderCoffee.app"
+            BlueprintName = "OrderCoffee"
+            ReferencedContainer = "container:OrderCoffee.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "MilkTeaShopApp.app"
-            BlueprintName = "MilkTeaShopApp"
-            ReferencedContainer = "container:MilkTeaShopApp.xcodeproj">
+            BuildableName = "OrderCoffee.app"
+            BlueprintName = "OrderCoffee"
+            ReferencedContainer = "container:OrderCoffee.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

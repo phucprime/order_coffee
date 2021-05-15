@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.milkteashopapp"
+        applicationId "com.ordercoffee"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
