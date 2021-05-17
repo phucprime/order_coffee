@@ -1,5 +1,7 @@
-import HeaderBar from './HeaderBar'
+import HeaderBar from "./HeaderBar";
+import CustomButton from "./CustomButton";
 
 export {
-    HeaderBar
+    HeaderBar,
+    CustomButton
 }
