@@ -3,15 +3,40 @@ import {
     View,
     Text,
     TouchableOpacity,
-    StyleSheet
+    StyleSheet,
+    ScrollView
 } from 'react-native';
 
 import { HeaderBar } from "../components";
 
-const Home = ({ navigation }) => {
+import { 
+    COLORS, 
+    SIZES, 
+    constants, 
+    icons, 
+    dummyData, 
+    FONTS, 
+    images 
+} from '../constants';
+
+import { connect } from "react-redux";
+
+const Home = ({ navigation, appTheme }) => {
     return (
         <View style={styles.container}>
             <HeaderBar />
+
+            <ScrollView
+                style={{
+                    flex: 1,
+                    marginTop: -25,
+                    borderTopLeftRadius: SIZES.radius * 2,
+                    borderTopRightRadius: SIZES.radius * 2,
+                    backgroundColor: appTheme.backgroundColor
+                }}
+            >
+
+            </ScrollView>
         </View>
     )
 }
@@ -22,4 +47,19 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Home;
+//export default Home;
+
+function mapStateToProps (state) {
+    return {
+        appTheme: state.appTheme,
+        error: state.error
+    }
+}
+
+//inject toggle theme from themeActions
+function mapDispatchToProps (dispatch) {
+    return {
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -10,7 +10,20 @@ import {
 
 import { FONTS, SIZES, COLORS, icons } from "../constants";
 
-const HeaderBar = () => {
+import { connect } from "react-redux";
+
+import { toggleTheme } from "../stores/themeActions";
+
+const HeaderBar = ({ appTheme, toggleTheme }) => {
+
+    function handleToggleTheme () {
+        if (appTheme.name == "light") {
+            toggleTheme("dark")
+        } else {
+            toggleTheme("light")
+        }
+    }
+
     return (
         <SafeAreaView
             style={{
@@ -42,13 +55,15 @@ const HeaderBar = () => {
                     borderRadius: 20,
                     backgroundColor: COLORS.lightPurple
                 }}
+                onPress={() => handleToggleTheme()}
             >
                 <View
                     style={{
                         width: 40,
                         height: 40,
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        ...(appTheme.name == "light") ? styles.selectedLightModeStyle : {}
                     }}
                 >
                     <Image 
@@ -67,7 +82,8 @@ const HeaderBar = () => {
                         height: 40,
                         alignItems: 'center',
                         justifyContent: 'center',
-                        ...styles.selectedNightModeStyle
+                        //...styles.selectedNightModeStyle
+                        ...(appTheme.name == "dark") ? styles.selectedNightModeStyle : {}
                     }}
                 >
                     <Image 
@@ -93,8 +109,26 @@ const styles = StyleSheet.create({
     },
     selectedLightModeStyle: {
         borderRadius: 20,
-        backgroundColor: COLORS.white
+        backgroundColor: COLORS.yellow
     }
 })
 
-export default HeaderBar;
+// export default HeaderBar;
+
+function mapStateToProps (state) {
+    return {
+        appTheme: state.appTheme,
+        error: state.error
+    }
+}
+
+//inject toggle theme from themeActions
+function mapDispatchToProps (dispatch) {
+    return {
+        toggleTheme: (themeType) => {
+            return dispatch(toggleTheme(themeType))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderBar);
