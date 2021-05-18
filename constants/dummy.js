@@ -178,17 +178,17 @@ export const menuList = [
 export const milkList = [
     {
         id: 1,
-        name: "Almond Milk",
+        name: "Vinamilk",
         image: require("../assets/icons/milk.png"),
     },
     {
         id: 2,
-        name: "Oat Milk",
+        name: "TH True milk",
         image: require("../assets/icons/milk2.png"),
     },
     {
         id: 3,
-        name: "Whole Milk",
+        name: "Dalat milk",
         image: require("../assets/icons/milk3.png"),
     }
 ]
