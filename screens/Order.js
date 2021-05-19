@@ -42,6 +42,10 @@ const Order = ({ navigation, route, appTheme }) => {
         setMenu(menu)
     }, [selectedCategory])
 
+    function priceFormat (price) {
+        return price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'
+    }
+
     function renderHeaderSection () {
         return (
             <SafeAreaView
@@ -338,7 +342,7 @@ const Order = ({ navigation, route, appTheme }) => {
                                                     fontSize: 15
                                                 }}
                                             >
-                                                {item.price}
+                                                {priceFormat(item.price)}
                                             </Text>
                                         </View>
 

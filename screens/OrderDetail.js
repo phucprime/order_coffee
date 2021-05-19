@@ -34,6 +34,10 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
         setSelectedItem(selectedItem)
     }, [])
 
+    function priceFormat (price) {
+        return price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'
+    }
+
     function handleSwitchMilk (action) {
         if (action == "next" && dummyData.milkList.length - 1 > selectedMilkIndex ) {
             setSelectedMilkIndex(selectedMilkIndex + 1)
@@ -193,7 +197,7 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
                                     ...FONTS.body3
                                 }}
                             >
-                                {selectedItem?.price}
+                                {selectedItem?.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'}
                             </Text>
                         </TouchableOpacity>
 
@@ -227,7 +231,7 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
                                     ...FONTS.body3
                                 }}
                             >
-                                {selectedItem?.price}
+                                {(selectedItem?.price + 7000).toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'}
                             </Text>
                         </TouchableOpacity>
                     </View>
