@@ -518,7 +518,7 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
             <ScrollView
                 contentContainerStyle={{
                     flex: 1,
-                    paddingBottom: 150
+                    paddingBottom: 250
                 }}
             >
                 {/* Header */}
