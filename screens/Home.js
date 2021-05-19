@@ -297,10 +297,11 @@ const Home = ({ navigation, appTheme }) => {
                             >
                                 {/* Image */}
                                 <Image 
-                                    source={images.strawberryBackground}
+                                    source={item.image}
                                     resizeMode='contain'
                                     style={{
-                                        width: '100%'
+                                        width: 220,
+                                        height: 220
                                     }}
                                 />
 

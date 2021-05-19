@@ -178,42 +178,51 @@ export const menuList = [
 export const milkList = [
     {
         id: 1,
-        name: "Vinamilk",
-        image: require("../assets/icons/milk.png"),
+        name: "No milk",
+        price: 0,
+        image: require("../assets/icons/milk3.png"),
     },
     {
         id: 2,
-        name: "TH True milk",
-        image: require("../assets/icons/milk2.png"),
+        name: "Ong Tho milk",
+        price: 18000,
+        image: require("../assets/icons/ong-tho-milk.png"),
     },
     {
         id: 3,
-        name: "Dalat milk",
-        image: require("../assets/icons/milk3.png"),
+        name: "Vinamilk",
+        price: 9000,
+        image: require("../assets/icons/vinamilk.png"),
+    },
+    {
+        id: 4,
+        name: "TH True milk",
+        price: 10000,
+        image: require("../assets/icons/th-true-milk.png"),
     }
 ]
 
 const promos = [
     {
         id: 1,
-        name: "Strawberry Sensation",
-        description: "Strawberry smoothie with strawberry bits",
-        calories: "379 - 570",
-        image: require("../assets/images/strawberry-background.png")
+        name: "Goose Berry Smoothie",
+        description: "Goose Berry Smoothie with strawberry bits",
+        calories: "379 - 571",
+        image: require("../assets/images/goose-berry.png")
     },
     {
         id: 2,
-        name: "Strawberry Sensation",
-        description: "Strawberry smoothie with strawberry bits",
+        name: "Peach Tea",
+        description: "The best drink of the day",
         calories: "400 - 570",
-        image: require("../assets/images/strawberry-background.png")
+        image: require("../assets/images/peach-tea.png")
     },
     {
         id: 3,
-        name: "Strawberry Sensation",
-        description: "Strawberry smoothie with strawberry bits",
+        name: "Black Tea Macchiato",
+        description: "Hot deal for you",
         calories: "449 - 570",
-        image: require("../assets/images/strawberry-background.png")
+        image: require("../assets/images/black-tea.png")
     },
 
 ]

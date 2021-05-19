@@ -43,6 +43,10 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
             setSelectedMilkIndex(selectedMilkIndex + 1)
         } else if (action == "prev" && selectedMilkIndex > 0) {
             setSelectedMilkIndex(selectedMilkIndex - 1)
+        } else if (action == "next" && selectedMilkIndex === dummyData.milkList.length - 1) {
+            setSelectedMilkIndex(0)
+        } else if (action == "prev" && selectedMilkIndex === 0) {
+            setSelectedMilkIndex(dummyData.milkList.length - 1)
         }
     }
 
@@ -197,7 +201,10 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
                                     ...FONTS.body3
                                 }}
                             >
-                                {selectedItem?.price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'}
+                                {
+                                    (selectedItem?.price + dummyData.milkList[selectedMilkIndex].price)
+                                        .toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'
+                                }
                             </Text>
                         </TouchableOpacity>
 
@@ -231,7 +238,10 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
                                     ...FONTS.body3
                                 }}
                             >
-                                {(selectedItem?.price + 7000).toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'}
+                                {
+                                    (selectedItem?.price + 7000 + dummyData.milkList[selectedMilkIndex].price)
+                                        .toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'
+                                }
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -289,9 +299,8 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
                                 resizeMode='contain'
                                 style={{
                                     flex: 1,
-                                    width: 70,
-                                    height: 70,
-                                    tintColor: COLORS.white
+                                    width: 80,
+                                    height: 80
                                 }}
                             />
 
@@ -321,6 +330,19 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
                             }}
                         >
                             {dummyData.milkList[selectedMilkIndex].name}
+                        </Text>
+                        <Text
+                            style={{
+                                color: appTheme.textColor,
+                                ...FONTS.body3
+                            }}
+                        >
+                            {
+                                dummyData.milkList[selectedMilkIndex].price > 0 ?
+                                    '+ ' + dummyData.milkList[selectedMilkIndex].price
+                                    .toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ' 
+                                    : 'Less fat of drink'
+                            }
                         </Text>
                     </View>
 
