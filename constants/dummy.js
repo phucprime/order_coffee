@@ -56,7 +56,7 @@ export const menuList = [
     {
         id: 1,
         name: "Brown Sugar Fresh Milk Tea",
-        description: "This drink is made from 3 ingredients, tapioca pearls, caramelised brown sugar and milk.",
+        description: "This drink is made from 3 ingredients, caramelised brown sugar and milk.",
         price: 35000,
         thumbnail: require("../assets/images/brown-sugar-fresh-mt.png"),
         category: "Milk Tea"
@@ -64,7 +64,7 @@ export const menuList = [
     {
         id: 2,
         name: "Matcha Milk Tea",
-        description: "In a glass jar, mix the matcha green tea powder with a little bit of water – just enough to form a paste.",
+        description: "In a glass jar, mix the matcha green tea powder with a little bit of water.",
         price: 39000,
         thumbnail: require("../assets/images/matcha-mt.png"),
         category: "Milk Tea"
@@ -120,7 +120,7 @@ export const menuList = [
     {
         id: 9,
         name: "Vietnamese Traditional Coffee",
-        description: "The ubiquitous Vietnamese street coffee stalls utilize rudimentary aluminum drip filters",
+        description: "The ubiquitous Vietnamese street coffee stalls utilize aluminum drip filters.",
         price: 29000,
         thumbnail: require("../assets/images/Vietnamese-traditional-coffee.png"),
         category: "Coffee"
@@ -128,7 +128,7 @@ export const menuList = [
     {
         id: 10,
         name: "Cappuccino",
-        description: "A cappuccino is an espresso-based coffee drink that originated in Italy",
+        description: "A cappuccino is an espresso-based coffee drink that originated in Italy.",
         price: 32000,
         thumbnail: require("../assets/images/latte.png"),
         category: "Coffee"
@@ -136,7 +136,7 @@ export const menuList = [
     {
         id: 11,
         name: "Mocha",
-        description: "A caffè mocha, also called mocaccino, is a chocolate-flavoured variant of a caffè latte.",
+        description: "Caffè mocha, also called mocaccino, is a chocolate-flavoured variant of a latte.",
         price: 35000,
         thumbnail: require("../assets/images/mocha.png"),
         category: "Coffee"
@@ -152,7 +152,7 @@ export const menuList = [
     {
         id: 13,
         name: "Americano",
-        description: "Caffè Americano is a type of coffee drink prepared by diluting an espresso with hot water.",
+        description: "Caffè Americano is a type of coffee drink prepared by an espresso with hot water.",
         price: 32000,
         thumbnail: require("../assets/images/americano.png"),
         category: "Coffee"

@@ -322,7 +322,7 @@ const Order = ({ navigation, route, appTheme }) => {
                                                 paddingVertical: SIZES.base,
                                                 borderRadius: SIZES.base,
                                                 justifyContent: 'space-between',
-                                                backgroundColor: COLORS.primary
+                                                backgroundColor: COLORS.lightGreen2
                                             }}
                                         >
                                             <Text 
@@ -337,7 +337,7 @@ const Order = ({ navigation, route, appTheme }) => {
                                             </Text>
                                             <Text 
                                                 style={{ 
-                                                    color: COLORS.yellow, 
+                                                    color: COLORS.primary, 
                                                     ...FONTS.h2, 
                                                     fontSize: 15
                                                 }}

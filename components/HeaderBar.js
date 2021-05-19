@@ -29,7 +29,7 @@ const HeaderBar = ({ appTheme, toggleTheme }) => {
             style={{
                 height: 150,
                 width: '100%',
-                backgroundColor: COLORS.purple,
+                backgroundColor: COLORS.primary,
                 flexDirection: 'row'
             }}
         >
@@ -53,7 +53,7 @@ const HeaderBar = ({ appTheme, toggleTheme }) => {
                     marginHorizontal: SIZES.padding,
                     height: 40,
                     borderRadius: 20,
-                    backgroundColor: COLORS.lightPurple
+                    backgroundColor: COLORS.lightGray3
                 }}
                 onPress={() => handleToggleTheme()}
             >

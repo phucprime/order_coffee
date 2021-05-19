@@ -306,7 +306,7 @@ const Home = ({ navigation, appTheme }) => {
                                 />
 
                                 {/* Name */}
-                                <Text style={{ color: COLORS.red, ...FONTS.h1, fontSize: 27}}>
+                                <Text style={{ color: appTheme.headerColor, ...FONTS.h2, fontSize: 27}}>
                                     {item.name}
                                 </Text>
 

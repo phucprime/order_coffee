@@ -2,7 +2,8 @@ import { Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 export const COLORS = {
-    primary: "#37A372",     // Green
+    primary: "#EA8025",
+    //primary: "#37A372",     // Green
     secondary: "#2C2C2C",    // Gray
 
     lightPurple: '#7B789F',
@@ -84,7 +85,7 @@ export const lightTheme = {
     tabBackgroundColor: COLORS.yellow,
     cardBackgroundColor: COLORS.lightYellow,
     bottomTabBarBackgroundColor: COLORS.lightYellow,
-    headerColor: COLORS.red,
+    headerColor: COLORS.primary,
 }
 
 export const selectedTheme = darkTheme

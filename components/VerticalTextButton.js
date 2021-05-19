@@ -19,9 +19,10 @@ const VerticalTextButton = ({ containerStyle, label, selected, onPress }) => {
         >
             <Text
                 style={{
-                    color: selected ? COLORS.white : COLORS.lightGreen,
+                    color: selected ? COLORS.white : COLORS.yellow,
                     ...FONTS.body2,
-                    fontSize: 20
+                    fontSize: selected ? 20 : 16,
+                    fontWeight: selected ? "bold" : 'normal'
                 }}
             >
                 {label}
