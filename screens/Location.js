@@ -1,50 +1,49 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react'
 import {
-    View,
-    Text,
-    TouchableOpacity,
-    StyleSheet,
-    SafeAreaView,
-    Image,
-    Input,
-    TextInput,
-    FlatList
-} from 'react-native';
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  TextInput,
+  FlatList
+} from 'react-native'
 
-import { 
-    dummyData,
-    COLORS,
-    SIZES,
-    FONTS,
-    icons
-} from "../constants";
+import {
+  dummyData,
+  COLORS,
+  SIZES,
+  FONTS,
+  icons
+} from '../constants'
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux'
 
-import { IconButton, TabButton } from "../components";
+import { IconButton, TabButton } from '../components'
 
 const Location = ({ navigation, appTheme }) => {
+  const [selectedTab, setSelectedTab] = useState(0)
 
-    const [selectedTab, setSelectedTab] = useState(0)
-
-    function renderHeader () {
-        return (
+  function renderHeader () {
+    return (
             <SafeAreaView
                 style={{
-                    height: 120,
-                    backgroundColor: COLORS.primary,
-                    alignItems: 'center'
+                  height: 120,
+                  backgroundColor: COLORS.primary,
+                  alignItems: 'center'
                 }}
             >
                 <View
                     style={{
-                        flexDirection: 'row',
-                        paddingHorizontal: SIZES.radius,
-                        alignItems: 'center'
+                      flexDirection: 'row',
+                      paddingHorizontal: SIZES.radius,
+                      alignItems: 'center'
                     }}
                 >
                     {/* Back button */}
-                    <IconButton 
+                    <IconButton
                         icon={icons.leftArrow}
                         onPress={() => navigation.goBack()}
                     />
@@ -52,8 +51,8 @@ const Location = ({ navigation, appTheme }) => {
                     {/* Title */}
                     <View
                         style={{
-                            flex: 1,
-                            alignItems: 'center'
+                          flex: 1,
+                          alignItems: 'center'
                         }}
                     >
                         <Text style={{ color: COLORS.white, ...FONTS.h1, fontSize: 25 }}>
@@ -66,69 +65,69 @@ const Location = ({ navigation, appTheme }) => {
 
                 </View>
             </SafeAreaView>
-        )
-    }
+    )
+  }
 
-    function renderTopBarSection () {
-        return (
+  function renderTopBarSection () {
+    return (
             <View
                 style={{
-                    flexDirection: 'row'
+                  flexDirection: 'row'
                 }}
             >
                 {/* Nearby */}
-                <TabButton 
+                <TabButton
                     containerStyle={{
-                        width: 80
+                      width: 80
                     }}
                     label="Nearby"
-                    selected={selectedTab == 0}
+                    selected={selectedTab === 0}
                     onPress={() => setSelectedTab(0)}
                 />
 
                 {/* Previous */}
-                <TabButton 
+                <TabButton
                     containerStyle={{
-                        width: 100
+                      width: 100
                     }}
                     label="Previous"
-                    selected={selectedTab == 1}
+                    selected={selectedTab === 1}
                     onPress={() => setSelectedTab(1)}
                 />
 
                 {/* Favorites */}
-                <TabButton 
+                <TabButton
                     containerStyle={{
-                        width: 100
+                      width: 100
                     }}
                     label="Favorites"
-                    selected={selectedTab == 2}
+                    selected={selectedTab === 2}
                     onPress={() => setSelectedTab(2)}
                 />
 
             </View>
-        )
-    }
+    )
+  }
 
-    function renderSearchBar () {
-        return (
+  function renderSearchBar () {
+    return (
             <View
                 style={{
-                    flexDirection: 'row',
-                    marginTop: SIZES.radius,
-                    height: 50,
-                    paddingHorizontal: SIZES.padding,
-                    borderRadius: 25,
-                    backgroundColor: COLORS.lightGreen2,
-                    alignItems: 'center'
+                  flexDirection: 'row',
+                  marginTop: SIZES.radius,
+                  height: 50,
+                  paddingHorizontal: SIZES.padding,
+                  borderRadius: 25,
+                  backgroundColor: COLORS.lightGreen2,
+                  alignItems: 'center'
                 }}
             >
-                <TextInput 
+                <TextInput
                     style={{
-                        flex: 1,
-                        height: 50,
-                        color: COLORS.black,
-                        ...FONTS.body4
+                      flex: 1,
+                      height: 50,
+                      color: COLORS.black,
+                      ...FONTS.body4
                     }}
                     placeholder="Enter your province, district or village..."
                     placeholderTextColor={COLORS.lightGray2}
@@ -136,61 +135,61 @@ const Location = ({ navigation, appTheme }) => {
                 <Image
                     source={icons.search}
                     style={{
-                        width: 30,
-                        height: 30,
-                        tintColor: COLORS.lightGray2
+                      width: 30,
+                      height: 30,
+                      tintColor: COLORS.lightGray2
                     }}
                 />
             </View>
-        )
-    }
+    )
+  }
 
-    function renderLocationList () {
-        return (
-            <FlatList 
+  function renderLocationList () {
+    return (
+            <FlatList
                 style={{
-                    marginTop: SIZES.radius,
-                    paddingHorizontal: SIZES.radius
+                  marginTop: SIZES.radius,
+                  paddingHorizontal: SIZES.radius
                 }}
                 data={dummyData.locations}
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
-                // when users scroll through the list 
+                // when users scroll through the list
                 // it will actually hide the keyboard
                 keyboardDismissMode='on-drag'
-                renderItem={({item}) => {
-                    return (
+                renderItem={({ item }) => {
+                  return (
                         <TouchableOpacity
                             style={{
-                                marginBottom: SIZES.radius,
-                                borderRadius: SIZES.radius * 2,
-                                paddingHorizontal: SIZES.padding,
-                                paddingVertical: SIZES.radius,
-                                backgroundColor: appTheme.cardBackgroundColor
+                              marginBottom: SIZES.radius,
+                              borderRadius: SIZES.radius * 2,
+                              paddingHorizontal: SIZES.padding,
+                              paddingVertical: SIZES.radius,
+                              backgroundColor: appTheme.cardBackgroundColor
                             }}
-                            onPress={() => navigation.navigate("Order", {selectedLocation: item})}
+                            onPress={() => navigation.navigate('Order', { selectedLocation: item })}
                         >
                             {/* Name and Bookmarks */}
                             <View
                                 style={{
-                                    flexDirection: 'row'
+                                  flexDirection: 'row'
                                 }}
                             >
                                 <Text
                                     style={{
-                                        flex: 1,
-                                        color: appTheme.textColor,
-                                        ...FONTS.h2
+                                      flex: 1,
+                                      color: appTheme.textColor,
+                                      ...FONTS.h2
                                     }}
                                 >
                                     {item.title}
                                 </Text>
-                                <Image 
+                                <Image
                                     source={item.bookmarked ? icons.bookmarkFilled : icons.bookmark}
                                     style={{
-                                        height: 20,
-                                        width: 20,
-                                        tintColor: item.bookmarked ? COLORS.red : COLORS.white
+                                      height: 20,
+                                      width: 20,
+                                      tintColor: item.bookmarked ? COLORS.red : COLORS.white
                                     }}
                                 />
                             </View>
@@ -198,15 +197,15 @@ const Location = ({ navigation, appTheme }) => {
                             {/* Address */}
                             <View
                                 style={{
-                                    marginTop: SIZES.base,
-                                    width: '80%'
+                                  marginTop: SIZES.base,
+                                  width: '80%'
                                 }}
                             >
                                 <Text
                                     style={{
-                                        color: appTheme.textColor,
-                                        ...FONTS.body3,
-                                        lineHeight: 21
+                                      color: appTheme.textColor,
+                                      ...FONTS.body3,
+                                      lineHeight: 21
                                     }}
                                 >
                                     {item.address}
@@ -216,14 +215,14 @@ const Location = ({ navigation, appTheme }) => {
                             {/* Operation hours */}
                             <View
                                 style={{
-                                    marginTop: SIZES.base
+                                  marginTop: SIZES.base
                                 }}
                             >
                                 <Text
                                     style={{
-                                        color: appTheme.textColor,
-                                        ...FONTS.body5,
-                                        lineHeight: 16
+                                      color: appTheme.textColor,
+                                      ...FONTS.body5,
+                                      lineHeight: 16
                                     }}
                                 >
                                     {item.operation_hours}
@@ -233,24 +232,24 @@ const Location = ({ navigation, appTheme }) => {
                             {/* Services */}
                             <View
                                 style={{
-                                    flexDirection: 'row',
-                                    marginTop: SIZES.base
+                                  flexDirection: 'row',
+                                  marginTop: SIZES.base
                                 }}
                             >
                                 {/* Pick up */}
                                 <View
                                     style={{
-                                        borderColor: appTheme.textColor,
-                                        borderWidth: 1,
-                                        borderRadius: 20,
-                                        paddingHorizontal: SIZES.radius,
-                                        paddingVertical: 5
+                                      borderColor: appTheme.textColor,
+                                      borderWidth: 1,
+                                      borderRadius: 20,
+                                      paddingHorizontal: SIZES.radius,
+                                      paddingVertical: 5
                                     }}
                                 >
                                     <Text
                                         style={{
-                                            color: appTheme.textColor,
-                                            ...FONTS.body3
+                                          color: appTheme.textColor,
+                                          ...FONTS.body3
                                         }}
                                     >
                                         Pick Up
@@ -260,18 +259,18 @@ const Location = ({ navigation, appTheme }) => {
                                 {/* Delivery */}
                                 <View
                                     style={{
-                                        borderColor: appTheme.textColor,
-                                        borderWidth: 1,
-                                        borderRadius: 20,
-                                        paddingHorizontal: SIZES.radius,
-                                        paddingVertical: 5,
-                                        marginLeft: 5
+                                      borderColor: appTheme.textColor,
+                                      borderWidth: 1,
+                                      borderRadius: 20,
+                                      paddingHorizontal: SIZES.radius,
+                                      paddingVertical: 5,
+                                      marginLeft: 5
                                     }}
                                 >
                                     <Text
                                         style={{
-                                            color: appTheme.textColor,
-                                            ...FONTS.body3
+                                          color: appTheme.textColor,
+                                          ...FONTS.body3
                                         }}
                                     >
                                         Delivery
@@ -281,13 +280,13 @@ const Location = ({ navigation, appTheme }) => {
                             </View>
 
                         </TouchableOpacity>
-                    )
+                  )
                 }}
             />
-        )
-    }
+    )
+  }
 
-    return (
+  return (
         <View style={styles.container}>
             {/* Header */}
             {renderHeader()}
@@ -295,12 +294,12 @@ const Location = ({ navigation, appTheme }) => {
             {/* Details */}
             <View
                 style={{
-                    flex: 1,
-                    backgroundColor: appTheme.backgroundColor,
-                    marginTop: -20,
-                    borderTopLeftRadius: SIZES.radius * 2,
-                    borderTopRightRadius: SIZES.radius * 2,
-                    padding: SIZES.padding
+                  flex: 1,
+                  backgroundColor: appTheme.backgroundColor,
+                  marginTop: -20,
+                  borderTopLeftRadius: SIZES.radius * 2,
+                  borderTopRightRadius: SIZES.radius * 2,
+                  padding: SIZES.padding
                 }}
             >
                 {renderTopBarSection()}
@@ -308,22 +307,22 @@ const Location = ({ navigation, appTheme }) => {
                 {renderLocationList()}
             </View>
         </View>
-    )
+  )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    }
+  container: {
+    flex: 1
+  }
 })
 
 // export default Location;
 
 function mapStateToProps (state) {
-    return {
-        appTheme: state.appTheme,
-        error: state.error
-    }
+  return {
+    appTheme: state.appTheme,
+    error: state.error
+  }
 }
 
-export default connect(mapStateToProps)(Location);
+export default connect(mapStateToProps)(Location)
