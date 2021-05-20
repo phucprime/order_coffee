@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/display-name */
 import React from 'react'
+
 import {
   Image,
   Platform,
@@ -8,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native'
+
 import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs'
 
 import { Home, Rewards } from '../screens'

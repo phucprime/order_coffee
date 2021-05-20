@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React,
 {
   useState,
@@ -366,8 +365,6 @@ const styles = StyleSheet.create({
     flex: 1
   }
 })
-
-// export default Home;
 
 function mapStateToProps (state) {
   return {

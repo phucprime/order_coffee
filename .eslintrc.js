@@ -6,10 +6,7 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
-    'standard',
-    'standard-jsx',
-    'standard-react',
-    'eslint:recommended'
+    'standard'
   ],
   parserOptions: {
     ecmaFeatures: {

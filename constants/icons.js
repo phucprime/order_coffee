@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const add = require('../assets/icons/add.png')
 const bookmarkFilled = require('../assets/icons/bookmark-fill.png')
 const bookmark = require('../assets/icons/bookmark.png')

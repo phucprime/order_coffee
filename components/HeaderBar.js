@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
+
 import {
   View,
   Text,
@@ -112,8 +112,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.yellow
   }
 })
-
-// export default HeaderBar;
 
 function mapStateToProps (state) {
   return {

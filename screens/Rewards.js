@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
 import {
   View,
@@ -195,8 +194,6 @@ const styles = StyleSheet.create({
     flex: 1
   }
 })
-
-// export default Rewards;
 
 function mapStateToProps (state) {
   return {
