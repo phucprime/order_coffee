@@ -2,8 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    es6: true,
-    node: true
+    es6: true
   },
   extends: [
     'plugin:react/recommended',
@@ -16,8 +15,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true
     },
-    ecmaVersion: 12,
-    sourceType: 'module'
+    ecmaVersion: 12
   },
   plugins: [
     'react'
@@ -26,13 +24,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/display-name': 'off',
     'react/prop-types': 'off',
-    'no-use-before-define': 'off',
-    'no-unused-expressions': 'off',
-    'no-useless-escape': 'off',
-    'generator-star-spacing': ['error', {
-      before: false, after: true
-    }],
-    'yield-star-spacing': ['error', 'after'],
     camelcase: 'off'
   }
 }
