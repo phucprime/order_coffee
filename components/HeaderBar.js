@@ -1,97 +1,97 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React from 'react'
 import {
-    View,
-    Text,
-    SafeAreaView,
-    TouchableOpacity,
-    Image,
-    StyleSheet
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+  StyleSheet
 } from 'react-native'
 
-import { FONTS, SIZES, COLORS, icons } from "../constants";
+import { FONTS, SIZES, COLORS, icons } from '../constants'
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux'
 
-import { toggleTheme } from "../stores/themeActions";
+import { toggleTheme } from '../stores/themeActions'
 
 const HeaderBar = ({ appTheme, toggleTheme }) => {
-
-    function handleToggleTheme () {
-        if (appTheme.name == "light") {
-            toggleTheme("dark")
-        } else {
-            toggleTheme("light")
-        }
+  function handleToggleTheme () {
+    if (appTheme.name === 'light') {
+      toggleTheme('dark')
+    } else {
+      toggleTheme('light')
     }
+  }
 
-    return (
+  return (
         <SafeAreaView
             style={{
-                height: 150,
-                width: '100%',
-                backgroundColor: COLORS.primary,
-                flexDirection: 'row'
+              height: 150,
+              width: '100%',
+              backgroundColor: COLORS.primary,
+              flexDirection: 'row'
             }}
         >
             {/* Greetings */}
             <View
                 style={{
-                    flex: 1,
-                    paddingLeft: SIZES.padding
+                  flex: 1,
+                  paddingLeft: SIZES.padding
                 }}
             >
-                <Text style={{ color: COLORS.white , ...FONTS.h2 }}>Phuc Nguyen,</Text>
-                <Text style={{ color: COLORS.white , ...FONTS.h2 }}>Welcome back!</Text>
+                <Text style={{ color: COLORS.white, ...FONTS.h2 }}>Phuc Nguyen,</Text>
+                <Text style={{ color: COLORS.white, ...FONTS.h2 }}>Welcome back!</Text>
             </View>
 
             {/* Toggle button */}
             <TouchableOpacity
                 style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'flex-end',
-                    marginHorizontal: SIZES.padding,
-                    height: 40,
-                    borderRadius: 20,
-                    backgroundColor: COLORS.lightGray3
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  marginHorizontal: SIZES.padding,
+                  height: 40,
+                  borderRadius: 20,
+                  backgroundColor: COLORS.lightGray3
                 }}
                 onPress={() => handleToggleTheme()}
             >
                 <View
                     style={{
-                        width: 40,
-                        height: 40,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        ...(appTheme.name == "light") ? styles.selectedLightModeStyle : {}
+                      width: 40,
+                      height: 40,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      ...(appTheme.name === 'light') ? styles.selectedLightModeStyle : {}
                     }}
                 >
-                    <Image 
-                        source={icons.sunny} 
+                    <Image
+                        source={icons.sunny}
                         style={{
-                            height: 30,
-                            width: 30,
-                            tintColor: COLORS.white
+                          height: 30,
+                          width: 30,
+                          tintColor: COLORS.white
                         }}
                     />
                 </View>
 
                 <View
                     style={{
-                        width: 40,
-                        height: 40,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        //...styles.selectedNightModeStyle
-                        ...(appTheme.name == "dark") ? styles.selectedNightModeStyle : {}
+                      width: 40,
+                      height: 40,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      // ...styles.selectedNightModeStyle
+                      ...(appTheme.name === 'dark') ? styles.selectedNightModeStyle : {}
                     }}
                 >
-                    <Image 
-                        source={icons.night} 
+                    <Image
+                        source={icons.night}
                         style={{
-                            height: 30,
-                            width: 30,
-                            tintColor: COLORS.white
+                          height: 30,
+                          width: 30,
+                          tintColor: COLORS.white
                         }}
                     />
                 </View>
@@ -99,36 +99,36 @@ const HeaderBar = ({ appTheme, toggleTheme }) => {
             </TouchableOpacity>
 
         </SafeAreaView>
-    )
+  )
 }
 
 const styles = StyleSheet.create({
-    selectedNightModeStyle: {
-        borderRadius: 20,
-        backgroundColor: COLORS.black
-    },
-    selectedLightModeStyle: {
-        borderRadius: 20,
-        backgroundColor: COLORS.yellow
-    }
+  selectedNightModeStyle: {
+    borderRadius: 20,
+    backgroundColor: COLORS.black
+  },
+  selectedLightModeStyle: {
+    borderRadius: 20,
+    backgroundColor: COLORS.yellow
+  }
 })
 
 // export default HeaderBar;
 
 function mapStateToProps (state) {
-    return {
-        appTheme: state.appTheme,
-        error: state.error
-    }
+  return {
+    appTheme: state.appTheme,
+    error: state.error
+  }
 }
 
-//inject toggle theme from themeActions
+// inject toggle theme from themeActions
 function mapDispatchToProps (dispatch) {
-    return {
-        toggleTheme: (themeType) => {
-            return dispatch(toggleTheme(themeType))
-        }
+  return {
+    toggleTheme: (themeType) => {
+      return dispatch(toggleTheme(themeType))
     }
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderBar);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderBar)
