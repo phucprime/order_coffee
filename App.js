@@ -1,35 +1,34 @@
-import React from 'react';
-import { Location, Order, OrderDetail } from "./screens";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react'
+import { Location, Order, OrderDetail } from './screens'
+import { createStackNavigator } from '@react-navigation/stack'
+import { NavigationContainer } from '@react-navigation/native'
 import SplashScreen from 'react-native-splash-screen'
 
-import Tabs from "./navigation/tabs";
+import Tabs from './navigation/tabs'
 
-import { createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import themeReducer from "./stores/themeReducer";
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import themeReducer from './stores/themeReducer'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
-const store = createStore (
-    themeReducer,
-    applyMiddleware(thunk)
+const store = createStore(
+  themeReducer,
+  applyMiddleware(thunk)
 )
 
 const App = () => {
+  React.useEffect(() => {
+    SplashScreen.hide()
+  }, [])
 
-    React.useEffect(() => {
-        SplashScreen.hide();
-    }, [])
-
-    return (
+  return (
         <Provider store={store}>
             <NavigationContainer>
                 <Stack.Navigator
                     screenOptions={{
-                        headerShown: false
+                      headerShown: false
                     }}
                     initialRouteName={'Home'}
                 >
@@ -55,7 +54,7 @@ const App = () => {
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>
-    )
+  )
 }
 
-export default App;
+export default App
