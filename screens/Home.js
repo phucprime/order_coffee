@@ -26,8 +26,7 @@ import {
     constants,
     icons,
     dummyData,
-    FONTS,
-    images
+    FONTS
 } from '../constants';
 
 import { connect } from "react-redux";

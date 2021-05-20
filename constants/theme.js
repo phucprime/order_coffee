@@ -3,7 +3,6 @@ const { width, height } = Dimensions.get("window");
 
 export const COLORS = {
     primary: "#EA8025",
-    //primary: "#37A372",     // Green
     secondary: "#2C2C2C",    // Gray
 
     lightPurple: '#7B789F',
@@ -88,7 +87,7 @@ export const lightTheme = {
     headerColor: COLORS.primary,
 }
 
-export const selectedTheme = darkTheme
+export const selectedTheme = lightTheme
 
 const appTheme = { COLORS, SIZES, FONTS, darkTheme, lightTheme };
 

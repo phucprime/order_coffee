@@ -189,7 +189,7 @@ const Tabs = () => {
                 }}
             />
             <Tab.Screen
-                name="Favourite"
+                name="Favorite"
                 component={Home}
                 options={{
                     tabBarIcon: ({ focused }) => (
