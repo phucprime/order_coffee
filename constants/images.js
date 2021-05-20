@@ -1,9 +1,8 @@
-const strawberryBackground = require("../assets/images/strawberry-background.png")
+const strawberryBackground = require('../assets/images/strawberry-background.png')
 
 export default {
-    strawberryBackground
+  strawberryBackground
 }
-
 
 /*
 Curved shape
