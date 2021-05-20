@@ -10,7 +10,7 @@ import {
 
 import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs'
 
-import { Home, Rewards } from '../screens'
+import { Home, Rewards, Favorite } from '../screens'
 import { COLORS, SIZES, icons } from '../constants'
 
 import Svg, { Path } from 'react-native-svg'
@@ -190,7 +190,7 @@ const Tabs = () => {
             />
             <Tab.Screen
                 name="Favorite"
-                component={Home}
+                component={Favorite}
                 options={{
                   tabBarIcon: ({ focused }) => (
                         <Image

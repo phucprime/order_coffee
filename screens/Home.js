@@ -59,7 +59,12 @@ const TabIndicator = ({ measureLayout, scrollX }) => {
               left: 0,
               backgroundColor: COLORS.primary,
               borderRadius: SIZES.radius,
-              transform: [{ translateX }] // pass x position
+              transform: [{
+                // pass x position
+                translateX
+                // without 'perspective' the Animated will not render on Android
+                // while working fine on iOS
+              }]
             }}
         />
   )
