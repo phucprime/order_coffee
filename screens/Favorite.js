@@ -11,7 +11,7 @@ import {
   Image
 } from 'react-native'
 
-import { dummyData, FONTS, SIZES } from '../constants'
+import { COLORS, dummyData, FONTS, SIZES } from '../constants'
 
 import { connect } from 'react-redux'
 
@@ -26,6 +26,7 @@ const Favorite = ({ navigation, appTheme }) => {
 
   const favoriteItemScrollX = useRef(new Animated.Value(0)).current
 
+  // eslint-disable-next-line no-unused-vars
   const [favoriteCategory, setFavoriteCategory] = useState([{ id: -1 }, ...dummyData.favorites, { id: -2 }])
 
   const [favoriteItem, setFavoriteItem] = useState([{ id: -1 }, ...dummyData.favorites[0].items, { id: -2 }])
@@ -42,9 +43,11 @@ const Favorite = ({ navigation, appTheme }) => {
             decelerationRate={0}
             data={favoriteCategory}
             keyExtractor={item => `${item.id}`}
-            onScroll={Animated.event([
-              { nativeEvent: { contentOffset: { x: favoriteCategoryScrollX } } }
-            ], { useNativeDrive: false })}
+            onScroll={Animated.event(
+              [{
+                nativeEvent: { contentOffset: { x: favoriteCategoryScrollX } }
+              }],
+              { useNativeDriver: false })}
             onMomentumScrollEnd={(event) => {
               // Calculate position
               const position = (event.nativeEvent.contentOffset.x / FAVORITE_CATEGORY_SIZE).toFixed(0)
@@ -73,7 +76,7 @@ const Favorite = ({ navigation, appTheme }) => {
                   (index - 1) * FAVORITE_CATEGORY_SIZE,
                   index * FAVORITE_CATEGORY_SIZE
                 ],
-                outputRange: [25, Platform.OS === 'ios' ? 80 : 60, 25],
+                outputRange: [35, Platform.OS === 'ios' ? 80 : 60, 35],
                 extrapolate: 'clamp'
               })
 
@@ -148,9 +151,10 @@ const Favorite = ({ navigation, appTheme }) => {
             scrollEventThrottle={16}
             decelerationRate={0}
             bounces={false}
-            onScroll={Animated.event([
-              { nativeEvent: { contentOffset: { x: favoriteItemScrollX } } }
-            ], { useNativeDrive: false })}
+            onScroll={Animated.event(
+              [{
+                nativeEvent: { contentOffset: { x: favoriteItemScrollX } }
+              }], { useNativeDriver: false })}
             renderItem={({ item, index }) => {
               const opacity = favoriteItemScrollX.interpolate({
                 inputRange: [
@@ -158,7 +162,7 @@ const Favorite = ({ navigation, appTheme }) => {
                   (index - 1) * FAVORITE_ITEM_SIZE,
                   index * FAVORITE_ITEM_SIZE
                 ],
-                outputRange: [0.3, 1, 0.3],
+                outputRange: [0.5, 1, 0.5],
                 extrapolate: 'clamp'
               })
 
@@ -166,7 +170,7 @@ const Favorite = ({ navigation, appTheme }) => {
 
               if (Platform.OS === 'ios') {
                 if (SIZES.height > 800) {
-                  activeHeight = SIZES.height / 2.6
+                  activeHeight = SIZES.height / 2.5
                 } else {
                   activeHeight = SIZES.height / 1.65
                 }
@@ -180,7 +184,7 @@ const Favorite = ({ navigation, appTheme }) => {
                   (index - 1) * FAVORITE_ITEM_SIZE,
                   index * FAVORITE_ITEM_SIZE
                 ],
-                outputRange: [SIZES.height / 2.25, activeHeight, SIZES.height / 2.25],
+                outputRange: [SIZES.height / 3, activeHeight, SIZES.height / 3],
                 extrapolate: 'clamp'
               })
 
@@ -221,7 +225,7 @@ const Favorite = ({ navigation, appTheme }) => {
                             }}
                         >
                             <Text style={{
-                              color: appTheme.textColor,
+                              color: COLORS.red,
                               ...FONTS.h2,
                               marginBottom: SIZES.radius
                             }}>
@@ -229,7 +233,7 @@ const Favorite = ({ navigation, appTheme }) => {
                             </Text>
 
                             <Text style={{
-                              color: appTheme.textColor,
+                              color: COLORS.white,
                               ...FONTS.body3,
                               textAlign: 'center'
                             }}>
@@ -273,15 +277,26 @@ const Favorite = ({ navigation, appTheme }) => {
                   paddingBottom: 150
                 }}
             >
-                {/* Flat list of Favorite categories */}
-                <View style={{ height: 200 }}>
-                    {renderFavoriteCategories()}
-                </View>
+              <View style={{
+                alignItems: 'center',
+                marginTop: SIZES.padding
+              }}>
+                <Text style={{
+                  color: COLORS.primary,
+                  ...FONTS.h1
+                }}>
+                  Favorite drinks
+                </Text>
+              </View>
+              {/* Flat list of Favorite categories */}
+              <View style={{ height: 150, paddingTop: 25 }}>
+                  {renderFavoriteCategories()}
+              </View>
 
-                {/* Flat list of Favorite items */}
-                <View style={{ height: 500, paddingBottom: 150 }}>
-                    {renderFavoriteItems()}
-                </View>
+              {/* Flat list of Favorite items */}
+              <View style={{ height: 700, paddingBottom: 300 }}>
+                  {renderFavoriteItems()}
+              </View>
             </ScrollView>
         </View>
   )
