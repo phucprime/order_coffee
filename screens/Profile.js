@@ -7,23 +7,25 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
-  Animated
+  Animated,
+  FlatList
 } from 'react-native'
 
 import {
   COLORS,
   SIZES,
   FONTS,
-  images
+  images,
+  dummyData
 } from '../constants'
 
 import { connect } from 'react-redux'
 import { toggleBottomBar } from '../stores/profileMenuActions'
+import { CustomButton } from '../components'
 
 // For multiple Buttons...
 const TabButton = (currentTab, setCurrentTab, title, image) => {
   return (
-
       <TouchableOpacity
         onPress={() => {
           if (title === 'LogOut') {
@@ -81,6 +83,118 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
 
   function handleToggleBottomBar () {
     toggleBottomBar(!isOpen)
+  }
+
+  function renderProfile () {
+    return (
+      <View>
+        <Image
+            source={images.photo}
+            style={{
+              width: 200,
+              height: 200,
+              borderRadius: 20,
+              marginTop: 25
+            }}
+        />
+
+        <Text
+            style={{
+              ...FONTS.h2,
+              color: appTheme.textColor,
+              paddingTop: 15,
+              paddingBottom: 5,
+              textAlign: 'center'
+            }}
+        >
+            Phuc Nguyen
+        </Text>
+
+        <Text style={{ ...FONTS.body3, color: appTheme.textColor }}>
+            Techie, YouTuber, PS Lover,...{'\n'}
+            Date of birth: 01/01/1999{'\n'}
+            Live in: Ho Chi Minh City{'\n'}
+        </Text>
+      </View>
+    )
+  }
+
+  function renderNotify () {
+    return (
+      <View style={{
+        marginBottom: 300
+      }}>
+        <FlatList
+          style={{ flex: 1, width: SIZES.width }}
+          data={dummyData.notifications}
+          keyExtractor= {(item) => `${item.id}`}
+          renderItem={({ item }) => {
+            return (
+            <TouchableOpacity
+              style={{
+                shadowColor: '#00000021',
+                shadowOffset: {
+                  width: 0,
+                  height: 6
+                },
+                shadowOpacity: 0.37,
+                shadowRadius: 7.49,
+                elevation: 12,
+                marginLeft: SIZES.base * 2,
+                marginRight: SIZES.base * 2,
+                marginTop: SIZES.padding * 0.7,
+                backgroundColor: appTheme.cardBackgroundColor,
+                padding: SIZES.padding * 0.5,
+                flexDirection: 'row',
+                borderRadius: SIZES.radius * 1.5,
+                flex: 1
+              }}
+            >
+              <Image
+                style={{
+                  width: 90,
+                  height: 90
+                }}
+                source={{ uri: item.image }}
+              />
+              <View style={{
+                marginLeft: 20,
+                marginTop: 10
+              }}>
+                <Text style={{
+                  flex: 1,
+                  alignSelf: 'center',
+                  color: appTheme.textColor,
+                  ...FONTS.h3,
+                  fontSize: 18
+                }}>
+                  {item.name}
+                </Text>
+                <Text style={{
+                  fontSize: 14,
+                  flex: 1,
+                  color: '#6666ff'
+                }}>
+                  {`Order ID: ${item.count}`}
+                </Text>
+                <CustomButton
+                    isPrimaryButton={true}
+                    label='Re-Order'
+                    containerStyle={{
+                      width: 130,
+                      paddingVertical: 5,
+                      borderRadius: SIZES.radius * 2,
+                      marginLeft: SIZES.radius * 0.5
+                    }}
+                    labelStyle={{ ...FONTS.body3 }}
+                    onPress={() => navigation.navigate('Location')}
+                />
+              </View>
+            </TouchableOpacity>
+            )
+          }}/>
+      </View>
+    )
   }
 
   return (
@@ -179,49 +293,47 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
                       }]
                     }}
                 >
-                    <TouchableOpacity
-                        onPress={() => {
-                        // Do actions here....
-                        // Scale the view...
-                          Animated.timing(scaleValue, {
-                            toValue: showMenu ? 1 : 0.88,
-                            duration: 300,
-                            useNativeDriver: true
-                          })
-                            .start()
+                  <TouchableOpacity
+                      onPress={() => {
+                      // Do actions here....
+                      // Scale the view...
+                        Animated.timing(scaleValue, {
+                          toValue: showMenu ? 1 : 0.88,
+                          duration: 300,
+                          useNativeDriver: true
+                        })
+                          .start()
 
-                          Animated.timing(offsetValue, {
-                            // Random Value...
-                            toValue: showMenu ? 0 : 230,
-                            duration: 300,
-                            useNativeDriver: true
-                          })
-                            .start()
+                        Animated.timing(offsetValue, {
+                          // Random Value...
+                          toValue: showMenu ? 0 : 230,
+                          duration: 300,
+                          useNativeDriver: true
+                        })
+                          .start()
 
-                          Animated.timing(closeButtonOffset, {
-                            // Random Value...
-                            toValue: !showMenu ? -30 : 0,
-                            duration: 300,
-                            useNativeDriver: true
-                          })
-                            .start()
+                        Animated.timing(closeButtonOffset, {
+                          // Random Value...
+                          toValue: !showMenu ? -30 : 0,
+                          duration: 300,
+                          useNativeDriver: true
+                        })
+                          .start()
 
-                          setShowMenu(!showMenu)
+                        setShowMenu(!showMenu)
 
-                          handleToggleBottomBar()
+                        handleToggleBottomBar()
+                      }}
+                  >
+                    <Image
+                        source={showMenu ? images.close : images.menu}
+                        style={{
+                          width: 20,
+                          height: 20,
+                          tintColor: appTheme.textColor,
+                          marginTop: 40
                         }}
-                    >
-
-                      <Image
-                          source={showMenu ? images.close : images.menu}
-                          style={{
-                            width: 20,
-                            height: 20,
-                            tintColor: appTheme.textColor,
-                            marginTop: 40
-                          }}
-                      />
-
+                    />
                     </TouchableOpacity>
 
                     <Text
@@ -233,37 +345,13 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
                     >
                         {currentTab}
                     </Text>
-                <View
-                    style={{
-                      alignItems: 'center'
-                    }}
-                >
-
-                    <Image
-                        source={images.photo}
-                        style={{
-                          width: 200,
-                          height: 200,
-                          borderRadius: 20,
-                          marginTop: 25
-                        }}
-                    />
-
-                    <Text
-                        style={{
-                          ...FONTS.h2,
-                          color: appTheme.textColor,
-                          paddingTop: 15,
-                          paddingBottom: 5
-                        }}
+                    <View
+                      style={{
+                        alignItems: 'center'
+                      }}
                     >
-                        Phuc Nguyen
-                    </Text>
-
-                    <Text style={{ ...FONTS.body4, color: appTheme.textColor }}>
-                        Techie, YouTuber, PS Lover,...
-                    </Text>
-
+                      {currentTab === 'Profile' && renderProfile()}
+                      {currentTab === 'Notifications' && renderNotify()}
                     </View>
                 </Animated.View>
 
