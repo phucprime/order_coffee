@@ -9,12 +9,13 @@ import Tabs from './navigation/tabs'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import themeReducer from './stores/themeReducer'
+
+import rootReducers from './stores/index'
 
 const Stack = createStackNavigator()
 
 const store = createStore(
-  themeReducer,
+  rootReducers,
   applyMiddleware(thunk)
 )
 

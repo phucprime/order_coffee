@@ -115,12 +115,11 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (state) {
   return {
-    appTheme: state.appTheme,
-    error: state.error
+    appTheme: state.theme.appTheme,
+    error: state.theme.error
   }
 }
 
-// inject toggle theme from themeActions
 function mapDispatchToProps (dispatch) {
   return {
     toggleTheme: (themeType) => {

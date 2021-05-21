@@ -549,8 +549,8 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
 
 function mapStateToProps (state) {
   return {
-    appTheme: state.appTheme,
-    error: state.error
+    appTheme: state.theme.appTheme,
+    error: state.theme.error
   }
 }
 
