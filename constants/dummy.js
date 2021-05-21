@@ -305,13 +305,22 @@ const favorites = [
   }
 ]
 
+const notifications = [
+  { id: 1, name: 'Order Successfully', image: 'https://cdn.icon-icons.com/icons2/894/PNG/512/Tick_Mark_Dark_icon-icons.com_69147.png', count: '#124711' },
+  { id: 2, name: 'Order Successfully', image: 'https://cdn.icon-icons.com/icons2/894/PNG/512/Tick_Mark_Dark_icon-icons.com_69147.png', count: '#234722' },
+  { id: 3, name: 'Order Denied', image: 'https://icons-for-free.com/iconfiles/png/512/cercle+close+delete+dismiss+remove+icon-1320196712448219692.png', count: '#324723' },
+  { id: 4, name: 'Order Successfully', image: 'https://cdn.icon-icons.com/icons2/894/PNG/512/Tick_Mark_Dark_icon-icons.com_69147.png', count: '#154573' },
+  { id: 5, name: 'Order Successfully', image: 'https://cdn.icon-icons.com/icons2/894/PNG/512/Tick_Mark_Dark_icon-icons.com_69147.png', count: '#123451' }
+]
+
 const dummyData = {
   availableRewards,
   locations,
   menuList,
   milkList,
   promos,
-  favorites
+  favorites,
+  notifications
 }
 
 export default dummyData
