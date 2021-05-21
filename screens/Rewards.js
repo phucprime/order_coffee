@@ -172,7 +172,7 @@ const Rewards = ({ navigation, appTheme }) => {
                         >
                             <Text
                                 style={{
-                                  color: item.eligible ? COLORS.black : COLORS.lightGray2,
+                                  color: item.eligible ? COLORS.black : COLORS.white,
                                   ...FONTS.body3
                                 }}
                             >
