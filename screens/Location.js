@@ -149,7 +149,8 @@ const Location = ({ navigation, appTheme }) => {
             <FlatList
                 style={{
                   marginTop: SIZES.radius,
-                  paddingHorizontal: SIZES.radius
+                  paddingHorizontal: SIZES.radius,
+                  marginBottom: 50
                 }}
                 data={dummyData.locations}
                 keyExtractor={item => item.id}

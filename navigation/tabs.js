@@ -10,7 +10,7 @@ import {
 
 import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs'
 
-import { Home, Rewards, Favorite } from '../screens'
+import { Home, Rewards, Favorite, Location } from '../screens'
 import { COLORS, SIZES, icons } from '../constants'
 
 import Svg, { Path } from 'react-native-svg'
@@ -35,7 +35,7 @@ const CustomTabBar = (props) => {
   )
 }
 
-const CustomTabBarButton = ({ containerStyle, isFloat, children, onPress }) => {
+const CustomTabBarButton = ({ containerStyle, isFloat, children, onPress, isOrder }) => {
   if (isFloat) {
     return (
             <View
@@ -66,7 +66,7 @@ const CustomTabBarButton = ({ containerStyle, isFloat, children, onPress }) => {
                       width: 60,
                       height: 60,
                       borderRadius: 30,
-                      backgroundColor: COLORS.primary
+                      backgroundColor: isOrder ? COLORS.transparent : COLORS.primary
                     }}
                     onPress={onPress}
                 >
@@ -167,11 +167,11 @@ const Tabs = () => {
 
             <Tab.Screen
                 name="AddOrder"
-                component={Home}
+                component={Location}
                 options={{
                   tabBarIcon: ({ focused }) => (
                         <Image
-                            source={icons.add}
+                            source={!focused ? icons.add : icons.location}
                             resizeMode="contain"
                             style={{
                               width: 35,
