@@ -230,355 +230,76 @@ const promos = [
 const favorites = [
   {
     id: 1,
-    name: 'Malaysia',
+    name: 'Coffee',
     image: require('../assets/images/coffee.png'),
     items: [
       {
         id: 1,
-        name: 'Kuching',
-        description: 'Kuching, officially the City of Kuching, is the capital and the most populous city in the state of Sarawak in Malaysia. It is also the capital of Kuching Division.',
-        image: require('../assets/images/coffee.png'),
-        rate: '4.89',
-        mapInitialRegion: {
-          latitude: 1.557177,
-          longitude: 110.351902,
-          latitudeDelta: 0.0053,
-          longitudeDelta: 0.0044
-        },
-        hotels: [
-          {
-            id: '1',
-            name: 'Riverside Majestic Hotel',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 1.557907,
-              longitude: 110.352079
-            }
-          },
-          {
-            id: '2',
-            name: 'Grand Margherita Hotel',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 1.558163,
-              longitude: 110.352813
-            }
-          },
-          {
-            id: '3',
-            name: 'Hilton Kuching',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 1.557144,
-              longitude: 110.350496
-            }
-          }
-        ]
+        name: 'Black Coffee',
+        description: 'A fragrant cup of black coffee, with a hint of cocoa, is the best self-rewarding gift for those who love the most original essence of coffee.',
+        image: require('../assets/images/favorites/black-coffee.jpg')
       },
       {
         id: 2,
-        name: 'Kuala Lumpur',
-        description: 'Kuala Lumpur is the capital of Malaysia. Its modern skyline is dominated by the 451m-tall Petronas Twin Towers, a pair of glass-and-steel-clad skyscrapers with Islamic motifs.',
-        image: require('../assets/images/coffee.png'),
-        rate: '4.89',
-        mapInitialRegion: {
-          latitude: 3.135662,
-          longitude: 101.687128,
-          latitudeDelta: 0.0053,
-          longitudeDelta: 0.0044
-        },
-        hotels: [
-          {
-            id: '1',
-            name: 'Hilton Kuala Lumpur',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 3.135308,
-              longitude: 101.685729
-            }
-          },
-          {
-            id: '2',
-            name: 'Le Méridien Kuala Lumpur',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 3.135843,
-              longitude: 101.686544
-            }
-          },
-          {
-            id: '3',
-            name: 'The St. Regis Kuala Lumpur',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 3.136902,
-              longitude: 101.688924
-            }
-          }
-        ]
+        name: 'Milk Coffee',
+        description: 'Following in the footsteps of the Chinese people who settled in Saigon, Bac Siu is an abbreviation for "Bac biu" in Cantonese, which is: Glass of white milk with a little coffee.',
+        image: require('../assets/images/favorites/milk-coffee.jpg')
       },
       {
         id: 3,
-        name: 'Penang',
-        description: 'George Town is the colorful, multicultural capital of the Malaysian island of Penang.',
-        image: require('../assets/images/coffee.png'),
-        rate: '4.89',
-        mapInitialRegion: {
-          latitude: 5.432068,
-          longitude: 100.317376,
-          latitudeDelta: 0.0053,
-          longitudeDelta: 0.0044
-        },
-        hotels: [
-          {
-            id: '1',
-            name: 'Sunrise Gurney',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 5.432874,
-              longitude: 100.316750
-            }
-          },
-          {
-            id: '2',
-            name: 'Sunrise Gurney Homestay',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 5.431626,
-              longitude: 100.317848
-            }
-          },
-          {
-            id: '3',
-            name: 'Evergreen Laurel Hotel Penang',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 5.431288,
-              longitude: 100.317898
-            }
-          }
-        ]
+        name: 'Cappuccino',
+        description: 'Cappuccino is funny called a "one-third" drink - 1/3 Espresso, 1/3 Hot Milk, 1/3 Foam.',
+        image: require('../assets/images/favorites/latte.jpg')
       }
     ]
   },
   {
     id: 2,
-    name: 'India',
-    image: require('../assets/images/coffee.png'),
+    name: 'Smoothie',
+    image: require('../assets/images/smoothie.png'),
     items: [
       {
         id: 1,
-        name: 'Goa',
-        description: 'Known for its gorgeous beaches, stellar nightlife, delish seafood, world-heritage listed monuments, Goa is where all the fun is in India.',
-        image: require('../assets/images/coffee.png'),
-        rate: '4.89',
-        mapInitialRegion: {
-          latitude: 15.498931,
-          longitude: 73.767945,
-          latitudeDelta: 0.0053,
-          longitudeDelta: 0.0044
-        },
-        hotels: [
-          {
-            id: '1',
-            name: 'Taj Holiday Village',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 15.499815,
-              longitude: 73.769295
-            }
-          },
-          {
-            id: '2',
-            name: 'Taj Fort Aguada',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 15.497798,
-              longitude: 73.767097
-            }
-          }
-        ]
+        name: 'Lemon Smoothie',
+        description: 'The harmonious combination of rustic ingredients is very familiar to Vietnamese people for a cool, refreshing drink that is good for health.',
+        image: require('../assets/images/favorites/lemon-smoothie.jpg')
       },
       {
         id: 2,
-        name: 'Jaipur',
-        description: 'The Pink City, Jaipur is a destination you cannot miss when visiting India. Jaipur is a perfect reflection of what the royal state of Rajasthan is about.',
-        image: require('../assets/images/coffee.png'),
-        rate: '4.89',
-        mapInitialRegion: {
-          latitude: 26.928055,
-          longitude: 75.788295,
-          latitudeDelta: 0.0053,
-          longitudeDelta: 0.0044
-        },
-        hotels: [
-          {
-            id: '1',
-            name: 'Umaid Mahal',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 26.927940,
-              longitude: 75.789056
-            }
-          }
-        ]
+        name: 'Blueberry Smoothie',
+        description: 'Blueberry jam is sweet and sour, harmoniously combined with nutritious yogurt. A delicious smoothie that both the tip of the tongue and the skin will love.',
+        image: require('../assets/images/favorites/viet-quat.jpg')
       },
       {
         id: 3,
-        name: 'Agra',
-        description: 'Home to the symbol of love, Taj Mahal, Agra in Uttar Pradesh finds its spot on the world heritage map.',
-        image: require('../assets/images/coffee.png'),
-        rate: '4.89',
-        mapInitialRegion: {
-          latitude: 27.168123,
-          longitude: 78.049032,
-          latitudeDelta: 0.0053,
-          longitudeDelta: 0.0044
-        },
-        hotels: [
-          {
-            id: '1',
-            name: 'The Oberoi Amarvilas',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: 27.168123,
-              longitude: 78.049032
-            }
-          }
-        ]
+        name: 'Peach Smoothie',
+        description: 'The harmonious combination of rustic ingredients is very familiar to Vietnamese people for a cool, refreshing drink that is good for health.',
+        image: require('../assets/images/favorites/dao-viet-quat.jpg')
       }
     ]
   },
   {
     id: 3,
-    name: 'Indonesia',
-    image: require('../assets/images/coffee.png'),
+    name: 'Bubble Tea',
+    image: require('../assets/images/bubble-tea.png'),
     items: [
       {
         id: 1,
-        name: 'Bali',
-        description: 'Bali has it all. Scenic mountains, sacred temples, rich culture, sandy beaches, surf-worthy waves, lively nightlife, exciting shopping… and the list goes on.',
-        image: require('../assets/images/coffee.png'),
-        rate: '4.89',
-        mapInitialRegion: {
-          latitude: -8.422605,
-          longitude: 115.274697,
-          latitudeDelta: 0.0053,
-          longitudeDelta: 0.0044
-        },
-        hotels: [
-          {
-            id: '1',
-            name: 'The Kayon Jungle Resort',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: -8.422426,
-              longitude: 115.275185
-            }
-          },
-          {
-            id: '2',
-            name: 'Green View Private Villas',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: -8.422203,
-              longitude: 115.275142
-            }
-          }
-        ]
+        name: 'Matcha Macchiato',
+        description: 'The deliciously fragrant Matcha green tea powder with the rich Macchiato layer is a great combination.',
+        image: require('../assets/images/favorites/matcha.jpg')
       },
       {
         id: 2,
-        name: 'Jakarta',
-        description: 'Jakarta may seem like a daunting megacity, but it also has a couple of interesting places that are worth a stopover.',
-        image: require('../assets/images/coffee.png'),
-        rate: '4.89',
-        mapInitialRegion: {
-          latitude: -6.227687,
-          longitude: 106.826979,
-          latitudeDelta: 0.0053,
-          longitudeDelta: 0.0044
-        },
-        hotels: [
-          {
-            id: '1',
-            name: 'Oakwood Premier Cozmo',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: -6.227846,
-              longitude: 106.825391
-            }
-          },
-          {
-            id: '2',
-            name: 'JW Marriott Hotel',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: -6.227036,
-              longitude: 106.827333
-            }
-          }
-        ]
+        name: 'Latte Macchiato',
+        description: 'True to the delicate, healthy taste with a gentle tea taste, mixed with fresh milk and fatty macchiato.',
+        image: require('../assets/images/favorites/hong-tra.jpg')
       },
       {
         id: 3,
-        name: 'Nusa Penida',
-        description: 'If you are in Bali and you want to go off-beat, go to Nusa Penida. Nusa Penida is the biggest of the three Nusa Islands just off from mainland Bali.',
-        image: require('../assets/images/coffee.png'),
-        rate: '4.89',
-        mapInitialRegion: {
-          latitude: -8.703571,
-          longitude: 115.439826,
-          latitudeDelta: 0.0053,
-          longitudeDelta: 0.0044
-        },
-        hotels: [
-          {
-            id: '1',
-            name: 'Purist Beach',
-            image: require('../assets/images/coffee.png'),
-            rate: 5,
-            price: 199,
-            latlng: {
-              latitude: -8.703571,
-              longitude: 115.439826
-            }
-          }
-        ]
+        name: 'Macca Milk Tea',
+        description: 'Nutritious macadamia nut milk mixed with Oolong tea background for a balanced, sweet taste.',
+        image: require('../assets/images/favorites/mac-ca.jpg')
       }
     ]
   }
