@@ -4,6 +4,7 @@ import Order from './Order'
 import OrderDetail from './OrderDetail'
 import Rewards from './Rewards'
 import Favorite from './Favorite'
+import Profile from './Profile'
 
 export {
   Home,
@@ -11,5 +12,6 @@ export {
   Order,
   OrderDetail,
   Rewards,
-  Favorite
+  Favorite,
+  Profile
 }

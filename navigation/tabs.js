@@ -10,16 +10,18 @@ import {
 
 import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs'
 
-import { Home, Rewards, Favorite, Location } from '../screens'
+import { Home, Rewards, Favorite, Location, Profile } from '../screens'
 import { COLORS, SIZES, icons } from '../constants'
 
 import Svg, { Path } from 'react-native-svg'
 
+import { connect } from 'react-redux'
+
 const Tab = createBottomTabNavigator()
 
 const CustomTabBar = (props) => {
-  return (
-        <View>
+  return (props.isOpen
+    ? <View>
             <View
                 style={{
                   position: 'absolute',
@@ -32,6 +34,7 @@ const CustomTabBar = (props) => {
             />
             <BottomTabBar {...props.props} />
         </View>
+    : <View></View>
   )
 }
 
@@ -94,7 +97,7 @@ const CustomTabBarButton = ({ containerStyle, isFloat, children, onPress, isOrde
   }
 }
 
-const Tabs = () => {
+const Tabs = ({ isOpen }) => {
   return (
         <Tab.Navigator
             tabBarOptions={{
@@ -111,7 +114,7 @@ const Tabs = () => {
               }
             }}
             tabBar={(props) => (
-                <CustomTabBar props={props}/>
+                <CustomTabBar props={props} isOpen={isOpen}/>
             )}
         >
             <Tab.Screen
@@ -215,7 +218,7 @@ const Tabs = () => {
             />
             <Tab.Screen
                 name="Profile"
-                component={Home}
+                component={Profile}
                 options={{
                   tabBarIcon: ({ focused }) => (
                         <Image
@@ -242,4 +245,10 @@ const Tabs = () => {
   )
 }
 
-export default Tabs
+function mapStateToProps (state) {
+  return {
+    isOpen: state.profileMenu.isOpen
+  }
+}
+
+export default connect(mapStateToProps)(Tabs)

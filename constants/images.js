@@ -1,7 +1,26 @@
 const strawberryBackground = require('../assets/images/strawberry-background.png')
+const profileMenuIcon = require('../assets/profile/profile-menu-icon.png')
+// Tab ICons...
+const profile = require('../assets/profile/profile.png')
+const search = require('../assets/profile/search.png')
+const notifications = require('../assets/profile/bell.png')
+const settings = require('../assets/profile/settings.png')
+const logout = require('../assets/profile/logout.png')
+const menu = require('../assets/profile/menu.png')
+const close = require('../assets/profile/close.png')
+const photo = require('../assets/profile/photo.jpg')
 
 export default {
-  strawberryBackground
+  strawberryBackground,
+  profile,
+  profileMenuIcon,
+  search,
+  notifications,
+  settings,
+  logout,
+  menu,
+  close,
+  photo
 }
 
 /*
