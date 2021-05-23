@@ -87,51 +87,51 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
           Live in: Ho Chi Minh City{'\n'}
         </Text>
 
-        <View style={{ marginBottom: SIZES.width * 0.9, flex: 1 }}>
-          <FlatList
-            enableEmptySections={true}
-            data={dummyData.orderHistory}
-            keyExtractor= {(item) => `${item.id}`}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity>
-                  <View style={styles.orderHistoryBox}>
-                    <View style={styles.orderHistoryDate}>
-                      <Text style={styles.orderDay}>
-                        {item.day}
-                      </Text>
-                      <Text style={styles.orderMonth}>
-                        {item.month}
-                      </Text>
-                    </View>
-                    <View style={{ ...styles.orderContent, backgroundColor: appTheme.searchResult }}>
-                      <Text style={{ ...styles.orderHour, color: appTheme.textColor }}>
-                        10:00 am - 10:45 am
-                      </Text>
-                      <Text style={{ ...styles.orderName, color: appTheme.textColor }}>
-                        Black Coffee
-                      </Text>
-                      <Text style={{ ...styles.orderDescription, color: appTheme.textColor }}>
-                        The best of coffee. Try it now!
-                      </Text>
-                    </View>
+        <FlatList
+          enableEmptySections={true}
+          data={dummyData.orderHistory}
+          showsVerticalScrollIndicator={false}
+          keyExtractor= {(item) => `${item.id}`}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity>
+                <View style={styles.orderHistoryBox}>
+                  <View style={styles.orderHistoryDate}>
+                    <Text style={styles.orderDay}>
+                      {item.day}
+                    </Text>
+                    <Text style={styles.orderMonth}>
+                      {item.month}
+                    </Text>
                   </View>
-                </TouchableOpacity>
-              )
-            }}/>
-      </View>
+                  <View style={{ ...styles.orderContent, backgroundColor: appTheme.searchResult }}>
+                    <Text style={{ ...styles.orderHour, color: appTheme.textColor }}>
+                      10:00 am - 10:45 am
+                    </Text>
+                    <Text style={{ ...styles.orderName, color: appTheme.textColor }}>
+                      Black Coffee
+                    </Text>
+                    <Text style={{ ...styles.orderDescription, color: appTheme.textColor }}>
+                      The best of coffee. Try it now!
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            )
+          }}
+          ListFooterComponent={<View style={styles.emptyView} />}
+        />
       </View>
     )
   }
 
   function renderNotify () {
     return (
-      <View style={{
-        marginBottom: 300
-      }}>
+      <View>
         <FlatList
           style={{ flex: 1, width: SIZES.width }}
           data={dummyData.notifications}
+          showsVerticalScrollIndicator={false}
           keyExtractor= {(item) => `${item.id}`}
           renderItem={({ item }) => {
             return (
@@ -157,14 +157,16 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
                 </View>
               </TouchableOpacity>
             )
-          }}/>
+          }}
+          ListFooterComponent={<View style={styles.emptyView} />}
+        />
       </View>
     )
   }
 
   function renderSearch () {
     return (
-      <View style={{ marginBottom: 300 }}>
+      <View>
         <View style={styles.formSearchContent}>
           <View style={styles.inputSearchContainer}>
             <Image
@@ -181,6 +183,7 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
         <FlatList
           style={styles.searchList}
           data={dummyData.searchResults}
+          showsVerticalScrollIndicator={false}
           keyExtractor= {(item) => `${item.id}`}
           renderItem={({ item }) => {
             return (
@@ -195,16 +198,18 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
                 </Text>
               </View>
             )
-          }}/>
+          }}
+          ListFooterComponent={<View style={styles.emptyView} />}/>
       </View>
     )
   }
 
   function renderSetting () {
     return (
-      <View style={{ marginBottom: 300 }}>
+      <View>
         <FlatList style={styles.settingList}
           contentContainerStyle={styles.listSettingContainer}
+          showsVerticalScrollIndicator={false}
           data={dummyData.settings}
           horizontal={false}
           numColumns={2}
@@ -225,7 +230,9 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
                 </View>
               </View>
             )
-          }}/>
+          }}
+          ListFooterComponent={<View style={styles.emptyView} />}
+        />
       </View>
     )
   }
@@ -245,7 +252,6 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
                   View Profile
                 </Text>
             </TouchableOpacity>
-
             <View style={styles.viewTab}>
               {/* Tab bar buttons */}
               {TabButton(currentTab, setCurrentTab, 'Profile', images.profileMenuIcon)}
@@ -254,7 +260,7 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
               {TabButton(currentTab, setCurrentTab, 'Settings', images.settings)}
             </View>
 
-            <View>
+            <View style={styles.logOut}>
               {TabButton(currentTab, setCurrentTab, 'LogOut', images.logout)}
             </View>
         </View>
@@ -336,6 +342,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  emptyView: { height: 350 },
   currentTabText: {
     ...FONTS.h1,
     paddingTop: 20
@@ -526,7 +533,8 @@ const styles = StyleSheet.create({
   settingTitle: {
     ...FONTS.h3,
     flex: 1,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginTop: -SIZES.base * 2
   },
   formSearchContent: {
     flexDirection: 'row',
@@ -582,6 +590,9 @@ const styles = StyleSheet.create({
   },
   settingList: {
     paddingHorizontal: 5
+  },
+  logOut: {
+    marginBottom: SIZES.padding
   }
 })
 
