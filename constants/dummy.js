@@ -313,6 +313,43 @@ const notifications = [
   { id: 5, name: 'Order Successfully', image: 'https://cdn.icon-icons.com/icons2/894/PNG/512/Tick_Mark_Dark_icon-icons.com_69147.png', count: '#123451' }
 ]
 
+const searchResults = [
+  { id: 1, description: 'Coffee 1' },
+  { id: 2, description: 'Coffee 2' },
+  { id: 3, description: 'Coffee 3' },
+  { id: 4, description: 'Coffee 4' },
+  { id: 5, description: 'Coffee 5' },
+  { id: 6, description: 'Coffee 6' },
+  { id: 7, description: 'Coffee 7' },
+  { id: 8, description: 'Coffee 8' },
+  { id: 9, description: 'Coffee 9' }
+]
+
+const settings = [
+  { id: 1, title: 'Budget', image: 'https://img.icons8.com/color/70/000000/cottage.png' },
+  { id: 1, title: 'Personal', image: 'https://img.icons8.com/color/70/000000/administrator-male.png' },
+  { id: 2, title: 'Favorite', image: 'https://img.icons8.com/color/70/000000/filled-like.png' },
+  { id: 3, title: 'Vote', image: 'https://img.icons8.com/color/70/000000/facebook-like.png' },
+  { id: 4, title: 'Manage', image: 'https://img.icons8.com/color/70/000000/shutdown.png' },
+  { id: 5, title: 'Traffic', image: 'https://img.icons8.com/color/70/000000/traffic-jam.png' },
+  { id: 6, title: 'Give Away', image: 'https://img.icons8.com/dusk/70/000000/visual-game-boy.png' },
+  { id: 8, title: 'Mini Games', image: 'https://img.icons8.com/flat_round/70/000000/cow.png' },
+  { id: 9, title: 'Community', image: 'https://img.icons8.com/color/70/000000/coworking.png' },
+  { id: 9, title: 'Advance', image: 'https://img.icons8.com/nolan/70/000000/job.png' }
+]
+
+const orderHistory = [
+  { id: 1, day: 1, month: 'Sep' },
+  { id: 2, day: 2, month: 'Jan' },
+  { id: 3, day: 3, month: 'Aug' },
+  { id: 4, day: 4, month: 'Dec' },
+  { id: 5, day: 5, month: 'Jul' },
+  { id: 6, day: 6, month: 'Oct' },
+  { id: 7, day: 7, month: 'Sep' },
+  { id: 8, day: 8, month: 'Jan' },
+  { id: 9, day: 9, month: 'May' }
+]
+
 const dummyData = {
   availableRewards,
   locations,
@@ -320,7 +357,10 @@ const dummyData = {
   milkList,
   promos,
   favorites,
-  notifications
+  notifications,
+  searchResults,
+  settings,
+  orderHistory
 }
 
 export default dummyData

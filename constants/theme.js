@@ -74,7 +74,8 @@ export const darkTheme = {
   tabBackgroundColor: COLORS.lightGray,
   cardBackgroundColor: COLORS.gray3,
   bottomTabBarBackgroundColor: COLORS.gray3,
-  headerColor: COLORS.yellow
+  headerColor: COLORS.yellow,
+  searchResult: COLORS.gray2
 }
 
 export const lightTheme = {
@@ -84,7 +85,8 @@ export const lightTheme = {
   tabBackgroundColor: COLORS.yellow,
   cardBackgroundColor: COLORS.lightYellow,
   bottomTabBarBackgroundColor: COLORS.lightYellow,
-  headerColor: COLORS.primary
+  headerColor: COLORS.primary,
+  searchResult: COLORS.white
 }
 
 export const selectedTheme = lightTheme

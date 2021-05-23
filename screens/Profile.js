@@ -8,7 +8,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Animated,
-  FlatList
+  FlatList,
+  TextInput
 } from 'react-native'
 
 import {
@@ -16,7 +17,8 @@ import {
   SIZES,
   FONTS,
   images,
-  dummyData
+  dummyData,
+  icons
 } from '../constants'
 
 import { connect } from 'react-redux'
@@ -87,14 +89,13 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
 
   function renderProfile () {
     return (
-      <View>
+      <View style={{ alignItems: 'center' }}>
         <Image
             source={images.photo}
             style={{
-              width: 200,
-              height: 200,
-              borderRadius: 20,
-              marginTop: 25
+              width: 100,
+              height: 100,
+              marginTop: SIZES.base
             }}
         />
 
@@ -102,8 +103,8 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
             style={{
               ...FONTS.h2,
               color: appTheme.textColor,
-              paddingTop: 15,
-              paddingBottom: 5,
+              paddingTop: SIZES.base,
+              paddingBottom: SIZES.base,
               textAlign: 'center'
             }}
         >
@@ -111,10 +112,43 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
         </Text>
 
         <Text style={{ ...FONTS.body3, color: appTheme.textColor }}>
-            Techie, YouTuber, PS Lover,...{'\n'}
             Date of birth: 01/01/1999{'\n'}
             Live in: Ho Chi Minh City{'\n'}
         </Text>
+
+        <View style={{ marginBottom: SIZES.width * 0.9, flex: 1 }}>
+          <FlatList
+            enableEmptySections={true}
+            data={dummyData.orderHistory}
+            keyExtractor= {(item) => `${item.id}`}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity>
+                  <View style={styles.orderHistoryBox}>
+                    <View style={styles.orderHistoryDate}>
+                      <Text style={styles.orderDay}>
+                        {item.day}
+                      </Text>
+                      <Text style={styles.orderMonth}>
+                        {item.month}
+                      </Text>
+                    </View>
+                    <View style={{ ...styles.orderContent, backgroundColor: appTheme.searchResult }}>
+                      <Text style={{ ...styles.orderHour, color: appTheme.textColor }}>
+                        10:00 am - 10:45 am
+                      </Text>
+                      <Text style={{ ...styles.orderName, color: appTheme.textColor }}>
+                        Black Coffee
+                      </Text>
+                      <Text style={{ ...styles.orderDescription, color: appTheme.textColor }}>
+                        The best of coffee. Try it now!
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )
+            }}/>
+      </View>
       </View>
     )
   }
@@ -191,6 +225,74 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
                 />
               </View>
             </TouchableOpacity>
+            )
+          }}/>
+      </View>
+    )
+  }
+
+  function renderSearch () {
+    return (
+      <View style={{ marginBottom: 300 }}>
+        <View style={styles.formSearchContent}>
+          <View style={styles.inputSearchContainer}>
+            <Image
+              style={[styles.iconItemSearchResult, styles.inputIcon]}
+              source={icons.search}
+            />
+            <TextInput
+                style={styles.inputs}
+                placeholder="Search"
+                underlineColorAndroid='transparent'/>
+          </View>
+        </View>
+
+        <FlatList
+          style={styles.searchList}
+          data={dummyData.searchResults}
+          keyExtractor= {(item) => `${item.id}`}
+          renderItem={({ item }) => {
+            return (
+              <View style={{ ...styles.searchResultBox, backgroundColor: appTheme.searchResult }}>
+                <Image
+                  style={{ ...styles.image, tintColor: appTheme.textColor }}
+                  source={icons.coffee_cup}
+                />
+
+                <Text style={{ ...styles.name, color: appTheme.textColor }}>
+                  {item.description}
+                </Text>
+              </View>
+            )
+          }}/>
+      </View>
+    )
+  }
+
+  function renderSetting () {
+    return (
+      <View style={{ marginBottom: 300 }}>
+        <FlatList style={styles.settingList}
+          contentContainerStyle={styles.listSettingContainer}
+          data={dummyData.settings}
+          horizontal={false}
+          numColumns={2}
+          keyExtractor= {(item) => {
+            return item.id
+          }}
+          renderItem={({ item }) => {
+            return (
+              <View>
+                <TouchableOpacity style={{ ...styles.cardSettings, backgroundColor: appTheme.searchResult }}>
+                  <Image style={styles.cardSettingImage} source={{ uri: item.image }}/>
+                </TouchableOpacity>
+
+                <View style={styles.cardSettingHeader}>
+                  <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ ...styles.settingTitle, color: appTheme.textColor }}>{item.title}</Text>
+                  </View>
+                </View>
+              </View>
             )
           }}/>
       </View>
@@ -352,6 +454,8 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
                     >
                       {currentTab === 'Profile' && renderProfile()}
                       {currentTab === 'Notifications' && renderNotify()}
+                      {currentTab === 'Search' && renderSearch()}
+                      {currentTab === 'Settings' && renderSetting()}
                     </View>
                 </Animated.View>
 
@@ -365,6 +469,148 @@ const Profile = ({ navigation, appTheme, isOpen, toggleBottomBar }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  listSettingContainer: {
+    alignItems: 'center'
+  },
+  orderHistoryBox: {
+    padding: 10,
+    flexDirection: 'row',
+    marginRight: SIZES.base
+  },
+  orderHistoryDate: {
+    flexDirection: 'column'
+  },
+  orderDay: {
+    fontSize: 50,
+    color: '#0099FF',
+    fontWeight: '600'
+  },
+  orderMonth: {
+    fontSize: 16,
+    color: '#0099FF',
+    fontWeight: '600'
+  },
+  orderContent: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginLeft: 10,
+    padding: 10,
+    borderRadius: 10
+  },
+  orderDescription: {
+    ...FONTS.body4
+  },
+  orderHour: {
+    ...FONTS.body2
+  },
+  orderName: {
+    ...FONTS.body3
+  },
+  cardSettings: {
+    shadowColor: COLORS.lightGray2,
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+
+    elevation: 12,
+    marginVertical: 20,
+    marginHorizontal: 40,
+    width: 120,
+    height: 120,
+    borderRadius: SIZES.radius * 8,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  cardSettingHeader: {
+    paddingVertical: 17,
+    paddingHorizontal: 16,
+    borderTopLeftRadius: 1,
+    borderTopRightRadius: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  cardSettingContent: {
+    paddingVertical: 12.5,
+    paddingHorizontal: 16
+  },
+  cardSettingFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 12.5,
+    paddingBottom: 25,
+    paddingHorizontal: 16,
+    borderBottomLeftRadius: 1,
+    borderBottomRightRadius: 1
+  },
+  cardSettingImage: {
+    height: 50,
+    width: 50,
+    alignSelf: 'center'
+  },
+  settingTitle: {
+    ...FONTS.h3,
+    flex: 1,
+    alignSelf: 'center'
+  },
+  formSearchContent: {
+    flexDirection: 'row',
+    marginTop: SIZES.base,
+    width: SIZES.width,
+    paddingHorizontal: SIZES.base
+  },
+  inputSearchContainer: {
+    backgroundColor: COLORS.white,
+    borderRadius: SIZES.radius * 2,
+    height: 45,
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1
+  },
+  iconItemSearchResult: {
+    width: 30,
+    height: 30
+  },
+  iconBtnSearch: {
+    alignSelf: 'center'
+  },
+  inputs: {
+    height: 45,
+    marginLeft: 16
+  },
+  inputIcon: {
+    marginLeft: 15,
+    justifyContent: 'center'
+  },
+  searchList: {
+    marginTop: 20,
+    padding: 10,
+    paddingBottom: 250
+  },
+  searchResultBox: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginTop: 10,
+    flexDirection: 'row',
+    borderRadius: SIZES.radius
+  },
+  image: {
+    width: 45,
+    height: 45,
+    borderRadius: SIZES.radius * 2,
+    marginLeft: SIZES.radius
+  },
+  name: {
+    ...FONTS.h3,
+    alignSelf: 'center',
+    paddingHorizontal: SIZES.padding
+  },
+  settingList: {
+    paddingHorizontal: 5
   }
 })
 
