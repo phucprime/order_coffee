@@ -53,14 +53,9 @@ const TabIndicator = ({ measureLayout, scrollX }) => {
   return (
         <Animated.View
             style={{
-              position: 'absolute',
-              height: '100%',
+              ...styles.tabIndicatorAnimated,
               width: TabIndicatorWidth,
-              left: 0,
-              backgroundColor: COLORS.primary,
-              borderRadius: SIZES.radius,
               transform: [{
-                // pass x position
                 translateX
                 // without 'perspective' the Animated will not render on Android
                 // while working fine on iOS
@@ -99,12 +94,8 @@ const Tabs = ({ appTheme, scrollX, onPromoTabPress }) => {
         <View
             ref={containerRef}
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginTop: SIZES.padding,
-              backgroundColor: appTheme.tabBackgroundColor,
-              borderRadius: SIZES.radius
+              ...styles.tabsView,
+              backgroundColor: appTheme.tabBackgroundColor
             }}
         >
             {/* Tab Indicator */}
@@ -132,12 +123,7 @@ const Tabs = ({ appTheme, scrollX, onPromoTabPress }) => {
                             // access to the ref property of tab
                             // which will then allow we to measure the layout
                             ref={item.ref}
-                            style={{
-                              paddingHorizontal: 15,
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              height: 40
-                            }}
+                            style={styles.tabsTouchView}
                         >
                             <Animated.Text style={{ color: textColor, ...FONTS.h3 }}>
                                 {item.title}
@@ -165,82 +151,31 @@ const Home = ({ navigation, appTheme }) => {
   function renderAvailableRewards () {
     return (
             <TouchableOpacity
-                style={{
-                  flexDirection: 'row',
-                  marginTop: SIZES.padding,
-                  marginHorizontal: SIZES.padding,
-                  height: 100
-                }}
+                style={styles.rewardTouch}
                 onPress={() => navigation.navigate('Rewards')}
             >
                 {/* Reward Cup */}
-                <View
-                    style={{
-                      width: 100,
-                      height: '100%',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: COLORS.pink,
-                      borderTopLeftRadius: 15,
-                      borderBottomLeftRadius: 15
-                    }}
-                >
+                <View style={styles.rewardViewCup}>
                     <ImageBackground
                         source={icons.reward_cup}
                         resizeMode="contain"
-                        style={{
-                          width: 85,
-                          height: 85,
-                          marginLeft: 3,
-                          alignItems: 'center'
-                        }}
+                        style={styles.rewardCupImage}
                     >
-                        <View
-                            style={{
-                              top: 35,
-                              width: 30,
-                              height: 30,
-                              borderRadius: 15,
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              backgroundColor: COLORS.transparentBlack
-                            }}
-                        >
-                            <Text style={{ color: COLORS.white, ...FONTS.h4 }}>
+                        <View style={styles.pointInCup}>
+                            <Text style={styles.pointInCupText}>
                                 199
                             </Text>
                         </View>
-
                     </ImageBackground>
                 </View>
 
                 {/* Reward Detail */}
-                <View
-                    style={{
-                      flex: 1,
-                      backgroundColor: COLORS.lightPink,
-                      marginLeft: -10,
-                      borderRadius: 15,
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                >
-                    <Text
-                        style={{ color: COLORS.primary, ...FONTS.h2, fontSize: 20 }}
-                    >
+                <View style={styles.viewRewardDetail} >
+                    <Text style={styles.textAvailableRewards} >
                         Available Rewards
                     </Text>
-                    <View
-                        style={{
-                          marginTop: 5,
-                          padding: SIZES.base,
-                          borderRadius: SIZES.radius * 2,
-                          backgroundColor: COLORS.primary
-                        }}
-                    >
-                        <Text
-                            style={{ color: COLORS.white, ...FONTS.body3 }}
-                        >
+                    <View style={styles.viewPointDetail} >
+                        <Text style={styles.pointDetailText}>
                             50 points - 35.000đ
                         </Text>
                     </View>
@@ -252,12 +187,7 @@ const Home = ({ navigation, appTheme }) => {
 
   function renderPromoDeals () {
     return (
-            <View
-                style={{
-                  flex: 1,
-                  alignItems: 'center'
-                }}
-            >
+            <View style={styles.viewPromo}>
                 {/* Header - Tabs */}
                 <Tabs
                     appTheme={appTheme}
@@ -282,22 +212,12 @@ const Home = ({ navigation, appTheme }) => {
                     })}
                     renderItem={({ item, index }) => {
                       return (
-                            <View
-                                style={{
-                                  flex: 1,
-                                  alignItems: 'center',
-                                  width: SIZES.width,
-                                  paddingTop: SIZES.padding
-                                }}
-                            >
+                            <View style={styles.viewDetailPromo}>
                                 {/* Image */}
                                 <Image
                                     source={item.image}
                                     resizeMode='contain'
-                                    style={{
-                                      width: 220,
-                                      height: 220
-                                    }}
+                                    style={styles.imagePromo}
                                 />
 
                                 {/* Name */}
@@ -319,15 +239,8 @@ const Home = ({ navigation, appTheme }) => {
                                 <CustomButton
                                     label="Order Now"
                                     isPrimaryButton={true}
-                                    containerStyle={{
-                                      marginTop: 10,
-                                      paddingHorizontal: SIZES.padding,
-                                      paddingVertical: SIZES.base,
-                                      borderRadius: SIZES.radius * 2
-                                    }}
-                                    labelStyle={{
-                                      ...FONTS.h3
-                                    }}
+                                    containerStyle={styles.customButton}
+                                    labelStyle={{ ...FONTS.h3 }}
                                     onPress={() => navigation.navigate('Location')}
                                 />
 
@@ -345,15 +258,10 @@ const Home = ({ navigation, appTheme }) => {
 
             <ScrollView
                 style={{
-                  flex: 1,
-                  marginTop: -25,
-                  borderTopLeftRadius: SIZES.radius * 2,
-                  borderTopRightRadius: SIZES.radius * 2,
+                  ...styles.scrollView,
                   backgroundColor: appTheme.backgroundColor
                 }}
-                contentContainerStyle={{
-                  paddingBottom: 150
-                }}
+                contentContainerStyle={{ paddingBottom: 150 }}
             >
                 {/* Rewards */}
                 {renderAvailableRewards()}
@@ -368,6 +276,109 @@ const Home = ({ navigation, appTheme }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  scrollView: {
+    flex: 1,
+    marginTop: -25,
+    borderTopLeftRadius: SIZES.radius * 2,
+    borderTopRightRadius: SIZES.radius * 2
+  },
+  tabIndicatorAnimated: {
+    position: 'absolute',
+    height: '100%',
+    left: 0,
+    backgroundColor: COLORS.primary,
+    borderRadius: SIZES.radius
+  },
+  tabsView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: SIZES.padding,
+    borderRadius: SIZES.radius
+  },
+  tabsTouchView: {
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40
+  },
+  rewardTouch: {
+    flexDirection: 'row',
+    marginTop: SIZES.padding,
+    marginHorizontal: SIZES.padding,
+    height: 100
+  },
+  rewardViewCup: {
+    width: 100,
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.pink,
+    borderTopLeftRadius: 15,
+    borderBottomLeftRadius: 15
+  },
+  rewardCupImage: {
+    width: 85,
+    height: 85,
+    marginLeft: 3,
+    alignItems: 'center'
+  },
+  pointInCup: {
+    top: 35,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.transparentBlack
+  },
+  pointInCupText: {
+    color: COLORS.white,
+    ...FONTS.h4
+  },
+  viewRewardDetail: {
+    flex: 1,
+    backgroundColor: COLORS.lightPink,
+    marginLeft: -10,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  textAvailableRewards: {
+    color: COLORS.primary,
+    ...FONTS.h2,
+    fontSize: 20
+  },
+  viewPointDetail: {
+    marginTop: 5,
+    padding: SIZES.base,
+    borderRadius: SIZES.radius * 2,
+    backgroundColor: COLORS.primary
+  },
+  pointDetailText: {
+    color: COLORS.white,
+    ...FONTS.body3
+  },
+  viewPromo: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  viewDetailPromo: {
+    flex: 1,
+    alignItems: 'center',
+    width: SIZES.width,
+    paddingTop: SIZES.padding
+  },
+  imagePromo: {
+    width: 220,
+    height: 220
+  },
+  customButton: {
+    marginTop: 10,
+    paddingHorizontal: SIZES.padding,
+    paddingVertical: SIZES.base,
+    borderRadius: SIZES.radius * 2
   }
 })
 

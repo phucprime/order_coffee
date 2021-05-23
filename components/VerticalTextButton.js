@@ -2,7 +2,8 @@ import React from 'react'
 
 import {
   TouchableOpacity,
-  Text
+  Text,
+  StyleSheet
 } from 'react-native'
 
 import { FONTS, COLORS } from '../constants'
@@ -11,7 +12,7 @@ const VerticalTextButton = ({ containerStyle, label, selected, onPress }) => {
   return (
         <TouchableOpacity
             style={{
-              alignItems: 'center',
+              ...styles.rootTouch,
               transform: [{ rotate: '-90deg' }],
               ...containerStyle
             }}
@@ -20,7 +21,7 @@ const VerticalTextButton = ({ containerStyle, label, selected, onPress }) => {
             <Text
                 style={{
                   color: selected ? COLORS.white : COLORS.yellow,
-                  ...FONTS.body2,
+                  ...styles.text,
                   fontSize: selected ? 20 : 16,
                   fontWeight: selected ? 'bold' : 'normal'
                 }}
@@ -30,5 +31,14 @@ const VerticalTextButton = ({ containerStyle, label, selected, onPress }) => {
         </TouchableOpacity>
   )
 }
+
+const styles = StyleSheet.create({
+  rootTouch: {
+    alignItems: 'center'
+  },
+  text: {
+    ...FONTS.body2
+  }
+})
 
 export default VerticalTextButton

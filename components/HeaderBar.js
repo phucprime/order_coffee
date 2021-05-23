@@ -25,84 +25,57 @@ const HeaderBar = ({ appTheme, toggleTheme }) => {
   }
 
   return (
-        <SafeAreaView
-            style={{
-              height: 150,
-              width: '100%',
-              backgroundColor: COLORS.primary,
-              flexDirection: 'row'
-            }}
+    <SafeAreaView style={styles.safeAreaView}>
+      {/* Greetings */}
+      <View style={styles.greetingView}>
+        <Text style={styles.greetingText}>Phuc Nguyen,</Text>
+        <Text style={styles.greetingText}>Welcome back!</Text>
+      </View>
+
+      {/* Toggle button */}
+      <TouchableOpacity style={styles.touchToggle} onPress={() => handleToggleTheme()}>
+        <View
+          style={{
+            ...styles.viewSun,
+            ...(appTheme.name === 'light') ? styles.selectedLightModeStyle : {}
+          }}
         >
-            {/* Greetings */}
-            <View
-                style={{
-                  flex: 1,
-                  paddingLeft: SIZES.padding
-                }}
-            >
-                <Text style={{ color: COLORS.white, ...FONTS.h2 }}>Phuc Nguyen,</Text>
-                <Text style={{ color: COLORS.white, ...FONTS.h2 }}>Welcome back!</Text>
-            </View>
+          <Image source={icons.sunny} style={styles.sunIcon}/>
+        </View>
 
-            {/* Toggle button */}
-            <TouchableOpacity
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-end',
-                  marginHorizontal: SIZES.padding,
-                  height: 40,
-                  borderRadius: 20,
-                  backgroundColor: COLORS.lightGray3
-                }}
-                onPress={() => handleToggleTheme()}
-            >
-                <View
-                    style={{
-                      width: 40,
-                      height: 40,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      ...(appTheme.name === 'light') ? styles.selectedLightModeStyle : {}
-                    }}
-                >
-                    <Image
-                        source={icons.sunny}
-                        style={{
-                          height: 30,
-                          width: 30,
-                          tintColor: COLORS.white
-                        }}
-                    />
-                </View>
+        <View
+          style={{
+            ...styles.viewMoon,
+            // ...styles.selectedNightModeStyle
+            ...(appTheme.name === 'dark') ? styles.selectedNightModeStyle : {}
+          }}
+        >
+          <Image source={icons.night} style={styles.iconMoon}/>
+        </View>
 
-                <View
-                    style={{
-                      width: 40,
-                      height: 40,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      // ...styles.selectedNightModeStyle
-                      ...(appTheme.name === 'dark') ? styles.selectedNightModeStyle : {}
-                    }}
-                >
-                    <Image
-                        source={icons.night}
-                        style={{
-                          height: 30,
-                          width: 30,
-                          tintColor: COLORS.white
-                        }}
-                    />
-                </View>
+      </TouchableOpacity>
 
-            </TouchableOpacity>
-
-        </SafeAreaView>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
+  iconMoon: {
+    height: 30,
+    width: 30,
+    tintColor: COLORS.white
+  },
+  viewMoon: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  sunIcon: {
+    height: 30,
+    width: 30,
+    tintColor: COLORS.white
+  },
   selectedNightModeStyle: {
     borderRadius: 20,
     backgroundColor: COLORS.black
@@ -110,6 +83,32 @@ const styles = StyleSheet.create({
   selectedLightModeStyle: {
     borderRadius: 20,
     backgroundColor: COLORS.yellow
+  },
+  safeAreaView: {
+    height: 150,
+    width: '100%',
+    backgroundColor: COLORS.primary,
+    flexDirection: 'row'
+  },
+  greetingView: {
+    flex: 1,
+    paddingLeft: SIZES.padding
+  },
+  greetingText: { color: COLORS.white, ...FONTS.h2 },
+  touchToggle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginHorizontal: SIZES.padding,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: COLORS.lightGray3
+  },
+  viewSun: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 

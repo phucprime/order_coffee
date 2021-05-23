@@ -44,10 +44,9 @@ const Favorite = ({ navigation, appTheme }) => {
             data={favoriteCategory}
             keyExtractor={item => `${item.id}`}
             onScroll={Animated.event(
-              [{
-                nativeEvent: { contentOffset: { x: favoriteCategoryScrollX } }
-              }],
-              { useNativeDriver: false })}
+              [{ nativeEvent: { contentOffset: { x: favoriteCategoryScrollX } } }],
+              { useNativeDriver: false }
+            )}
             onMomentumScrollEnd={(event) => {
               // Calculate position
               const position = (event.nativeEvent.contentOffset.x / FAVORITE_CATEGORY_SIZE).toFixed(0)
@@ -92,22 +91,13 @@ const Favorite = ({ navigation, appTheme }) => {
 
               if (index === 0 || index === favoriteCategory.length - 1) {
                 return (
-                    <View
-                        style={{
-                          width: FAVORITE_CATEGORY_SIZE
-                        }}
-                    />
+                    <View style={styles.emptyView} />
                 )
               } else {
                 return (
                     <Animated.View
                         opacity={opacity}
-                        style={{
-                          height: 130,
-                          width: FAVORITE_CATEGORY_SIZE,
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                        }}
+                        style={styles.animatedCategory}
                     >
                         <Animated.Image
                             source={item.image}
@@ -117,14 +107,7 @@ const Favorite = ({ navigation, appTheme }) => {
                               height: mapSize
                             }}
                         />
-                        <Animated.Text
-                            style={{
-                              marginTop: 2,
-                              color: appTheme.textColor,
-                              fontSize: fontSize,
-                              fontWeight: 'bold'
-                            }}
-                        >
+                        <Animated.Text style={{ ...styles.animatedCategoryText, color: appTheme.textColor, fontSize: fontSize }}>
                             {item.name}
                         </Animated.Text>
                     </Animated.View>
@@ -143,18 +126,16 @@ const Favorite = ({ navigation, appTheme }) => {
             showsHorizontalScrollIndicator={false}
             data={favoriteItem}
             keyExtractor={item => `${item.id}`}
-            contentContainerStyle={{
-              alignItems: 'center'
-            }}
+            contentContainerStyle={{ alignItems: 'center' }}
             snapToAlignment='center'
             snapToInterval={Platform.OS === 'ios' ? FAVORITE_ITEM_SIZE + 28 : FAVORITE_ITEM_SIZE}
             scrollEventThrottle={16}
             decelerationRate={0}
             bounces={false}
             onScroll={Animated.event(
-              [{
-                nativeEvent: { contentOffset: { x: favoriteItemScrollX } }
-              }], { useNativeDriver: false })}
+              [{ nativeEvent: { contentOffset: { x: favoriteItemScrollX } } }],
+              { useNativeDriver: false }
+            )}
             renderItem={({ item, index }) => {
               const opacity = favoriteItemScrollX.interpolate({
                 inputRange: [
@@ -198,58 +179,26 @@ const Favorite = ({ navigation, appTheme }) => {
                 return (
                     <Animated.View
                         opacity={opacity}
-                        style={{
-                          width: FAVORITE_ITEM_SIZE,
-                          height: height,
-                          alignItems: 'center',
-                          borderRadius: 20,
-                          padding: 10
-                        }}
+                        style={{ height: height, ...styles.animatedItem }}
                     >
                         <Image
                             source={item.image}
                             resizeMode='cover'
-                            style={{
-                              position: 'absolute',
-                              width: '95%',
-                              height: '95%',
-                              borderRadius: 20
-                            }}
+                            style={styles.animatedItemImage}
                         />
-                        <View
-                            style={{
-                              flex: 1,
-                              alignItems: 'center',
-                              justifyContent: 'flex-end',
-                              marginHorizontal: SIZES.padding
-                            }}
-                        >
-                            <Text style={{
-                              color: COLORS.red,
-                              ...FONTS.h2,
-                              marginBottom: SIZES.radius
-                            }}>
+                        <View style={styles.animatedItemView}>
+                            <Text style={styles.animatedItemTextName}>
                                 {item.name}
                             </Text>
 
-                            <Text style={{
-                              color: COLORS.white,
-                              ...FONTS.body3,
-                              textAlign: 'center'
-                            }}>
+                            <Text style={styles.animatedItemTextDescription}>
                                 {item.description}
                             </Text>
 
                             <CustomButton
                                 isPrimaryButton={true}
                                 label='Delivery'
-                                containerStyle={{
-                                  width: 100,
-                                  paddingVertical: 5,
-                                  marginRight: SIZES.radius,
-                                  borderRadius: SIZES.radius * 2,
-                                  marginTop: SIZES.radius
-                                }}
+                                containerStyle={styles.customButton}
                                 labelStyle={{ ...FONTS.h3 }}
                                 onPress={() => navigation.navigate('Location')}
                             />
@@ -266,25 +215,11 @@ const Favorite = ({ navigation, appTheme }) => {
         <View style={styles.container}>
             <HeaderBar />
             <ScrollView
-                style={{
-                  flex: 1,
-                  marginTop: -25,
-                  borderTopLeftRadius: SIZES.radius * 2,
-                  borderTopRightRadius: SIZES.radius * 2,
-                  backgroundColor: appTheme.backgroundColor
-                }}
-                contentContainerStyle={{
-                  paddingBottom: 150
-                }}
+                style={{ ...styles.scrollView, backgroundColor: appTheme.backgroundColor }}
+                contentContainerStyle={{ paddingBottom: 150 }}
             >
-              <View style={{
-                alignItems: 'center',
-                marginTop: SIZES.padding
-              }}>
-                <Text style={{
-                  color: COLORS.primary,
-                  ...FONTS.h1
-                }}>
+              <View style={{ alignItems: 'center', marginTop: SIZES.padding }}>
+                <Text style={{ color: COLORS.primary, ...FONTS.h1 }}>
                   Favorite drinks
                 </Text>
               </View>
@@ -305,6 +240,60 @@ const Favorite = ({ navigation, appTheme }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  emptyView: {
+    width: FAVORITE_CATEGORY_SIZE
+  },
+  animatedCategory: {
+    height: 130,
+    width: FAVORITE_CATEGORY_SIZE,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  animatedCategoryText: {
+    marginTop: 2,
+    fontWeight: 'bold'
+  },
+  animatedItemImage: {
+    position: 'absolute',
+    width: '95%',
+    height: '95%',
+    borderRadius: 20
+  },
+  animatedItem: {
+    width: FAVORITE_ITEM_SIZE,
+    alignItems: 'center',
+    borderRadius: 20,
+    padding: 10
+  },
+  animatedItemView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginHorizontal: SIZES.padding
+  },
+  animatedItemTextName: {
+    color: COLORS.red,
+    ...FONTS.h2,
+    marginBottom: SIZES.radius
+  },
+  animatedItemTextDescription: {
+    color: COLORS.white,
+    ...FONTS.body3,
+    textAlign: 'center'
+  },
+  customButton: {
+    width: 100,
+    paddingVertical: 5,
+    marginRight: SIZES.radius,
+    borderRadius: SIZES.radius * 2,
+    marginTop: SIZES.radius
+  },
+  scrollView: {
+    flex: 1,
+    marginTop: -25,
+    borderTopLeftRadius: SIZES.radius * 2,
+    borderTopRightRadius: SIZES.radius * 2
   }
 })
 

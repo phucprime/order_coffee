@@ -28,81 +28,55 @@ const Location = ({ navigation, appTheme }) => {
 
   function renderHeader () {
     return (
-            <SafeAreaView
-                style={{
-                  height: 120,
-                  backgroundColor: COLORS.primary,
-                  alignItems: 'center'
-                }}
-            >
-                <View
-                    style={{
-                      flexDirection: 'row',
-                      paddingHorizontal: SIZES.radius,
-                      alignItems: 'center'
-                    }}
-                >
-                    {/* Back button */}
-                    <IconButton
-                        icon={icons.leftArrow}
-                        onPress={() => navigation.goBack()}
-                    />
+            <SafeAreaView style={styles.safeAreaView}>
+              <View style={styles.viewHeader}>
 
-                    {/* Title */}
-                    <View
-                        style={{
-                          flex: 1,
-                          alignItems: 'center'
-                        }}
-                    >
-                        <Text style={{ color: COLORS.white, ...FONTS.h1, fontSize: 25 }}>
-                            Locations
-                        </Text>
-                    </View>
+                {/* Back button */}
+                <IconButton
+                  icon={icons.leftArrow}
+                  onPress={() => navigation.goBack()}
+                />
 
-                    {/* Empty view -> Make the title is in the middle */}
-                    <View style={{ width: 25 }} />
-
+                {/* Title */}
+                <View style={styles.viewTitle}>
+                  <Text style={styles.textTitle}>
+                    Locations
+                  </Text>
                 </View>
+
+                {/* Empty view -> Make the title is in the middle */}
+                <View style={styles.emptyView} />
+
+              </View>
             </SafeAreaView>
     )
   }
 
   function renderTopBarSection () {
     return (
-            <View
-                style={{
-                  flexDirection: 'row'
-                }}
-            >
+            <View style={styles.topBarView}>
                 {/* Nearby */}
                 <TabButton
-                    containerStyle={{
-                      width: 80
-                    }}
-                    label="Nearby"
-                    selected={selectedTab === 0}
-                    onPress={() => setSelectedTab(0)}
+                  containerStyle={styles.nearbyTabButton}
+                  label="Nearby"
+                  selected={selectedTab === 0}
+                  onPress={() => setSelectedTab(0)}
                 />
 
                 {/* Previous */}
                 <TabButton
-                    containerStyle={{
-                      width: 100
-                    }}
-                    label="Previous"
-                    selected={selectedTab === 1}
-                    onPress={() => setSelectedTab(1)}
+                  containerStyle={styles.previousTabButton}
+                  label="Previous"
+                  selected={selectedTab === 1}
+                  onPress={() => setSelectedTab(1)}
                 />
 
                 {/* Favorites */}
                 <TabButton
-                    containerStyle={{
-                      width: 100
-                    }}
-                    label="Favorites"
-                    selected={selectedTab === 2}
-                    onPress={() => setSelectedTab(2)}
+                  containerStyle={styles.favoritesTabButton}
+                  label="Favorites"
+                  selected={selectedTab === 2}
+                  onPress={() => setSelectedTab(2)}
                 />
 
             </View>
@@ -111,34 +85,15 @@ const Location = ({ navigation, appTheme }) => {
 
   function renderSearchBar () {
     return (
-            <View
-                style={{
-                  flexDirection: 'row',
-                  marginTop: SIZES.radius,
-                  height: 50,
-                  paddingHorizontal: SIZES.padding,
-                  borderRadius: 25,
-                  backgroundColor: COLORS.lightGreen2,
-                  alignItems: 'center'
-                }}
-            >
+            <View style={styles.viewSearchBar}>
                 <TextInput
-                    style={{
-                      flex: 1,
-                      height: 50,
-                      color: COLORS.black,
-                      ...FONTS.body4
-                    }}
-                    placeholder="Enter your province, district or village..."
-                    placeholderTextColor={COLORS.lightGray2}
+                  style={styles.searchInput}
+                  placeholder="Enter your province, district or village..."
+                  placeholderTextColor={COLORS.lightGray2}
                 />
                 <Image
-                    source={icons.search}
-                    style={{
-                      width: 30,
-                      height: 30,
-                      tintColor: COLORS.lightGray2
-                    }}
+                  source={icons.search}
+                  style={styles.imageSearch}
                 />
             </View>
     )
@@ -147,11 +102,7 @@ const Location = ({ navigation, appTheme }) => {
   function renderLocationList () {
     return (
             <FlatList
-                style={{
-                  marginTop: SIZES.radius,
-                  paddingHorizontal: SIZES.radius,
-                  marginBottom: 50
-                }}
+                style={styles.flatList}
                 data={dummyData.locations}
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
@@ -161,124 +112,59 @@ const Location = ({ navigation, appTheme }) => {
                 renderItem={({ item }) => {
                   return (
                         <TouchableOpacity
-                            style={{
-                              marginBottom: SIZES.radius,
-                              borderRadius: SIZES.radius * 2,
-                              paddingHorizontal: SIZES.padding,
-                              paddingVertical: SIZES.radius,
-                              backgroundColor: appTheme.cardBackgroundColor
-                            }}
-                            onPress={() => navigation.navigate('Order', { selectedLocation: item })}
+                          style={{
+                            ...styles.touchLocationItem,
+                            backgroundColor: appTheme.cardBackgroundColor
+                          }}
+                          onPress={() => navigation.navigate('Order', { selectedLocation: item })}
                         >
-                            {/* Name and Bookmarks */}
-                            <View
-                                style={{
-                                  flexDirection: 'row'
-                                }}
-                            >
-                                <Text
-                                    style={{
-                                      flex: 1,
-                                      color: appTheme.textColor,
-                                      ...FONTS.h2
-                                    }}
-                                >
-                                    {item.title}
-                                </Text>
-                                <Image
-                                    source={item.bookmarked ? icons.bookmarkFilled : icons.bookmark}
-                                    style={{
-                                      height: 20,
-                                      width: 20,
-                                      tintColor: item.bookmarked ? COLORS.red : COLORS.white
-                                    }}
-                                />
+                          {/* Name and Bookmarks */}
+                          <View style={styles.viewNameAndBookmark}>
+                            <Text style={{ color: appTheme.textColor, ...styles.titleLocation }}>
+                              {item.title}
+                            </Text>
+                            <Image
+                              source={item.bookmarked ? icons.bookmarkFilled : icons.bookmark}
+                              style={{
+                                height: 20,
+                                width: 20,
+                                tintColor: item.bookmarked ? COLORS.red : COLORS.white
+                              }}
+                            />
+                          </View>
+
+                          {/* Address */}
+                          <View style={styles.viewAddress}>
+                            <Text style={{ color: appTheme.textColor, ...styles.textAddress }}>
+                                {item.address}
+                            </Text>
+                          </View>
+
+                          {/* Operation hours */}
+                          <View style={styles.viewOperationHour}>
+                            <Text style={{ color: appTheme.textColor, ...styles.textOperationHour }}>
+                                {item.operation_hours}
+                            </Text>
+                          </View>
+
+                          {/* Services */}
+                          <View style={styles.viewService}>
+
+                            {/* Pick up */}
+                            <View style={{ borderColor: appTheme.textColor, ...styles.viewPickUp }}>
+                              <Text style={{ color: appTheme.textColor, ...FONTS.body3 }}>
+                                Pick Up
+                              </Text>
                             </View>
 
-                            {/* Address */}
-                            <View
-                                style={{
-                                  marginTop: SIZES.base,
-                                  width: '80%'
-                                }}
-                            >
-                                <Text
-                                    style={{
-                                      color: appTheme.textColor,
-                                      ...FONTS.body3,
-                                      lineHeight: 21
-                                    }}
-                                >
-                                    {item.address}
-                                </Text>
+                            {/* Delivery */}
+                            <View style={{ borderColor: appTheme.textColor, ...styles.viewDelivery }}>
+                              <Text style={{ color: appTheme.textColor, ...FONTS.body3 }}>
+                                Delivery
+                              </Text>
                             </View>
 
-                            {/* Operation hours */}
-                            <View
-                                style={{
-                                  marginTop: SIZES.base
-                                }}
-                            >
-                                <Text
-                                    style={{
-                                      color: appTheme.textColor,
-                                      ...FONTS.body5,
-                                      lineHeight: 16
-                                    }}
-                                >
-                                    {item.operation_hours}
-                                </Text>
-                            </View>
-
-                            {/* Services */}
-                            <View
-                                style={{
-                                  flexDirection: 'row',
-                                  marginTop: SIZES.base
-                                }}
-                            >
-                                {/* Pick up */}
-                                <View
-                                    style={{
-                                      borderColor: appTheme.textColor,
-                                      borderWidth: 1,
-                                      borderRadius: 20,
-                                      paddingHorizontal: SIZES.radius,
-                                      paddingVertical: 5
-                                    }}
-                                >
-                                    <Text
-                                        style={{
-                                          color: appTheme.textColor,
-                                          ...FONTS.body3
-                                        }}
-                                    >
-                                        Pick Up
-                                    </Text>
-                                </View>
-
-                                {/* Delivery */}
-                                <View
-                                    style={{
-                                      borderColor: appTheme.textColor,
-                                      borderWidth: 1,
-                                      borderRadius: 20,
-                                      paddingHorizontal: SIZES.radius,
-                                      paddingVertical: 5,
-                                      marginLeft: 5
-                                    }}
-                                >
-                                    <Text
-                                        style={{
-                                          color: appTheme.textColor,
-                                          ...FONTS.body3
-                                        }}
-                                    >
-                                        Delivery
-                                    </Text>
-                                </View>
-
-                            </View>
+                          </View>
 
                         </TouchableOpacity>
                   )
@@ -289,24 +175,15 @@ const Location = ({ navigation, appTheme }) => {
 
   return (
         <View style={styles.container}>
-            {/* Header */}
-            {renderHeader()}
+          {/* Header */}
+          {renderHeader()}
 
-            {/* Details */}
-            <View
-                style={{
-                  flex: 1,
-                  backgroundColor: appTheme.backgroundColor,
-                  marginTop: -20,
-                  borderTopLeftRadius: SIZES.radius * 2,
-                  borderTopRightRadius: SIZES.radius * 2,
-                  padding: SIZES.padding
-                }}
-            >
-                {renderTopBarSection()}
-                {renderSearchBar()}
-                {renderLocationList()}
-            </View>
+          {/* Details */}
+          <View style={{ backgroundColor: appTheme.backgroundColor, ...styles.rootView }}>
+            {renderTopBarSection()}
+            {renderSearchBar()}
+            {renderLocationList()}
+          </View>
         </View>
   )
 }
@@ -314,6 +191,115 @@ const Location = ({ navigation, appTheme }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  rootView: {
+    flex: 1,
+    marginTop: -20,
+    borderTopLeftRadius: SIZES.radius * 2,
+    borderTopRightRadius: SIZES.radius * 2,
+    padding: SIZES.padding
+  },
+  safeAreaView: {
+    height: 120,
+    backgroundColor: COLORS.primary,
+    alignItems: 'center'
+  },
+  viewHeader: {
+    flexDirection: 'row',
+    paddingHorizontal: SIZES.radius,
+    alignItems: 'center'
+  },
+  viewTitle: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  textTitle: {
+    color: COLORS.white,
+    ...FONTS.h1,
+    fontSize: 25
+  },
+  emptyView: { width: 25 },
+  topBarView: {
+    flexDirection: 'row'
+  },
+  nearbyTabButton: {
+    width: 80
+  },
+  previousTabButton: {
+    width: 100
+  },
+  favoritesTabButton: {
+    width: 100
+  },
+  viewSearchBar: {
+    flexDirection: 'row',
+    marginTop: SIZES.radius,
+    height: 50,
+    paddingHorizontal: SIZES.padding,
+    borderRadius: 25,
+    backgroundColor: COLORS.lightGreen2,
+    alignItems: 'center'
+  },
+  searchInput: {
+    flex: 1,
+    height: 50,
+    color: COLORS.black,
+    ...FONTS.body4
+  },
+  imageSearch: {
+    width: 30,
+    height: 30,
+    tintColor: COLORS.lightGray2
+  },
+  flatList: {
+    marginTop: SIZES.radius,
+    paddingHorizontal: SIZES.radius,
+    marginBottom: 50
+  },
+  touchLocationItem: {
+    marginBottom: SIZES.radius,
+    borderRadius: SIZES.radius * 2,
+    paddingHorizontal: SIZES.padding,
+    paddingVertical: SIZES.radius
+  },
+  viewNameAndBookmark: {
+    flexDirection: 'row'
+  },
+  titleLocation: {
+    flex: 1,
+    ...FONTS.h2
+  },
+  viewAddress: {
+    marginTop: SIZES.base,
+    width: '80%'
+  },
+  textAddress: {
+    ...FONTS.body3,
+    lineHeight: 21
+  },
+  viewOperationHour: {
+    marginTop: SIZES.base
+  },
+  textOperationHour: {
+    ...FONTS.body5,
+    lineHeight: 16
+  },
+  viewService: {
+    flexDirection: 'row',
+    marginTop: SIZES.base
+  },
+  viewPickUp: {
+    borderWidth: 1,
+    borderRadius: 20,
+    paddingHorizontal: SIZES.radius,
+    paddingVertical: 5
+  },
+  viewDelivery: {
+    borderWidth: 1,
+    borderRadius: 20,
+    paddingHorizontal: SIZES.radius,
+    paddingVertical: 5,
+    marginLeft: 5
   }
 })
 

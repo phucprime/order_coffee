@@ -5,7 +5,8 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
-  ScrollView
+  ScrollView,
+  StyleSheet
 } from 'react-native'
 
 import {
@@ -31,6 +32,10 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
     const { selectedItem } = route.params
     setSelectedItem(selectedItem)
   }, [])
+
+  function toFixedPrice (price) {
+    return price && price.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'
+  }
 
   function handleSwitchMilk (action) {
     if (action === 'next' && dummyData.milkList.length - 1 > selectedMilkIndex) {
@@ -62,490 +67,423 @@ const OrderDetail = ({ navigation, route, appTheme }) => {
 
   function renderHeaderSection () {
     return (
-            <View
-                style={{
-                  width: '100%',
-                  height: '55%',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-            >
-                <View
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      bottom: 0,
-                      right: 0,
-                      left: 40,
-                      borderBottomLeftRadius: 100,
-                      backgroundColor: COLORS.primary
-                    }}
-                />
-                <Image
-                    source={selectedItem?.thumbnail}
-                    resizeMode='contain'
-                    style={{
-                      width: SIZES.width * 0.7,
-                      height: SIZES.width * 0.7
-                    }}
-                />
-                {/* Back Button */}
-                <IconButton
-                    containerStyle={{
-                      position: 'absolute',
-                      top: 45,
-                      left: 20,
-                      padding: 10,
-                      borderRadius: SIZES.radius,
-                      backgroundColor: COLORS.black
-                    }}
-                    icon={icons.leftArrow}
-                    onPress={() => navigation.goBack()}
-                />
+            <View style={styles.viewHeader}>
+              <View style={styles.viewHeaderShape} />
+              <Image
+                source={selectedItem?.thumbnail}
+                resizeMode='contain'
+                style={{ width: SIZES.width * 0.7, height: SIZES.width * 0.7 }}
+              />
+              {/* Back Button */}
+              <IconButton
+                containerStyle={styles.headerIconButton}
+                icon={icons.leftArrow}
+                onPress={() => navigation.goBack()}
+              />
             </View>
     )
   }
 
   function renderDetailSection () {
     return (
-            <View
-                style={{
-                  flex: 1,
-                  paddingHorizontal: 30,
-                  justifyContent: 'space-between',
-                  marginTop: SIZES.padding
-                }}
-            >
-                {/* Name and Description */}
-                <View>
-                    <Text
-                        style={{
-                          color: appTheme.headerColor,
-                          ...FONTS.h1,
-                          fontSize: 25
-                        }}
-                    >
-                        {selectedItem?.name}
-                    </Text>
-                    <Text
-                        style={{
-                          color: appTheme.textColor,
-                          ...FONTS.body3,
-                          marginTop: SIZES.base
-                        }}
-                    >
-                        {selectedItem?.description}
-                    </Text>
-                </View>
+      <View style={styles.viewDetail}>
+        {/* Name and Description */}
+        <View>
+          <Text style={{ color: appTheme.headerColor, ...FONTS.h1, fontSize: 25 }}>
+            {selectedItem?.name}
+          </Text>
+          <Text style={{ color: appTheme.textColor, ...FONTS.body3, marginTop: SIZES.base }}>
+            {selectedItem?.description}
+          </Text>
+        </View>
 
-                {/* Size */}
-                <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      marginTop: SIZES.radius
-                    }}
-                >
-                    {/* Label */}
-                    <Text
-                        style={{
-                          color: appTheme.headerColor,
-                          ...FONTS.h2,
-                          flex: 1,
-                          fontSize: 20
-                        }}
-                    >
-                        Pick A Size
-                    </Text>
+        {/* Size */}
+        <View style={styles.viewSize}>
+          {/* Label */}
+          <Text style={{ color: appTheme.headerColor, ...styles.pickSizeText }}>
+            Pick A Size
+          </Text>
 
-                    {/* Cup */}
-                    <View
-                        style={{
-                          flex: 1,
-                          flexDirection: 'row'
-                        }}
-                    >
-                        <TouchableOpacity
-                            style={{
-                              alignItems: 'center',
-                              justifyContent: 'flex-end'
-                            }}
-                            onPress={() => setSelectedSize('M')}
-                        >
-                            <ImageBackground
-                                source={icons.coffee_cup}
-                                style={{
-                                  width: 80,
-                                  height: 80,
-                                  alignItems: 'center',
-                                  justifyContent: 'center'
-                                }}
-                                imageStyle={{
-                                  tintColor: selectedSize === 'M' ? COLORS.primary : COLORS.lightGray2
-                                }}
-                            >
-                                <Text style={{ ...FONTS.body3, color: COLORS.white }}>
-                                    M
-                                </Text>
-                            </ImageBackground>
-                            <Text
-                                style={{
-                                  marginTop: 3,
-                                  color: appTheme.textColor,
-                                  ...FONTS.body3
-                                }}
-                            >
-                                {
-                                    (selectedItem?.price + dummyData.milkList[selectedMilkIndex].price)
-                                      .toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'
-                                }
-                            </Text>
-                        </TouchableOpacity>
+          {/* Cup */}
+          <View style={styles.viewCup}>
+            <TouchableOpacity style={styles.touchM} onPress={() => setSelectedSize('M')}>
+              <ImageBackground
+                source={icons.coffee_cup}
+                style={styles.imageM}
+                imageStyle={{ tintColor: selectedSize === 'M' ? COLORS.primary : COLORS.lightGray2 }}
+              >
+                <Text style={styles.textM}>
+                  M
+                </Text>
+              </ImageBackground>
+              <Text style={{ marginTop: 3, color: appTheme.textColor, ...FONTS.body3 }}>
+                {toFixedPrice(selectedItem?.price + dummyData.milkList[selectedMilkIndex].price)}
+              </Text>
+            </TouchableOpacity>
 
-                        <TouchableOpacity
-                            style={{
-                              alignItems: 'center',
-                              justifyContent: 'flex-end'
-                            }}
-                            onPress={() => setSelectedSize('L')}
-                        >
-                            <ImageBackground
-                                source={icons.coffee_cup}
-                                style={{
-                                  width: 100,
-                                  height: 100,
-                                  alignItems: 'center',
-                                  justifyContent: 'center'
-                                }}
-                                imageStyle={{
-                                  tintColor: selectedSize === 'L' ? COLORS.primary : COLORS.lightGray2
-                                }}
-                            >
-                                <Text style={{ ...FONTS.body3, color: COLORS.white }}>
-                                    L
-                                </Text>
-                            </ImageBackground>
-                            <Text
-                                style={{
-                                  marginTop: 3,
-                                  color: appTheme.textColor,
-                                  ...FONTS.body3
-                                }}
-                            >
-                                {
-                                    (selectedItem?.price + 7000 + dummyData.milkList[selectedMilkIndex].price)
-                                      .toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'
-                                }
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
+            <TouchableOpacity style={styles.touchL} onPress={() => setSelectedSize('L')}>
+              <ImageBackground
+                source={icons.coffee_cup}
+                style={styles.imageL}
+                imageStyle={{ tintColor: selectedSize === 'L' ? COLORS.primary : COLORS.lightGray2 }}
+              >
+                  <Text style={styles.textL}>
+                    L
+                  </Text>
+                </ImageBackground>
+                <Text style={{ marginTop: 3, color: appTheme.textColor, ...FONTS.body3 }}>
+                  {toFixedPrice(selectedItem?.price + 7000 + dummyData.milkList[selectedMilkIndex].price)}
+                </Text>
+            </TouchableOpacity>
+          </View>
 
-                </View>
+        </View>
 
-                {/* Milk, Sweetness and Ice */}
-                <View
-                    style={{
-                      flexDirection: 'row',
-                      marginTop: SIZES.padding
-                    }}
-                >
-                    {/* Milk */}
-                    <View
-                        style={{
-                          flex: 1,
-                          alignItems: 'center'
-                        }}
-                    >
-                        <Text style={{ color: appTheme.headerColor, ...FONTS.h2, fontSize: 20 }}>
-                            Milk
-                        </Text>
+        {/* Milk, Sweetness and Ice */}
+        <View style={styles.viewBottom}>
+          {/* Milk */}
+          <View style={styles.viewMilk}>
+            <Text style={{ color: appTheme.headerColor, ...FONTS.h2, fontSize: 20 }}>
+              Milk
+            </Text>
 
-                        <View
-                            style={{
-                              flexDirection: 'row',
-                              width: 100,
-                              height: 100,
-                              marginTop: SIZES.base,
-                              alignItems: 'center',
-                              borderRadius: SIZES.radius,
-                              backgroundColor: COLORS.primary
-                            }}
-                        >
-                            <IconButton
-                                icon={icons.leftArrow}
-                                containerStyle={{
-                                  marginLeft: -15,
-                                  width: 25,
-                                  height: 25,
-                                  borderRadius: 3,
-                                  backgroundColor: COLORS.white
-                                }}
-                                iconStyle={{
-                                  width: 15,
-                                  height: 15,
-                                  tintColor: COLORS.black
-                                }}
-                                onPress={() => handleSwitchMilk('prev')}
-                            />
+            <View style={styles.viewMilkSection}>
+              <IconButton
+                icon={icons.leftArrow}
+                containerStyle={styles.iconMilkReduceContainer}
+                iconStyle={styles.iconMilkReduceStyle}
+                onPress={() => handleSwitchMilk('prev')}
+              />
 
-                            <Image
-                                source={dummyData.milkList[selectedMilkIndex].image}
-                                resizeMode='contain'
-                                style={{
-                                  flex: 1,
-                                  width: 80,
-                                  height: 80
-                                }}
-                            />
+              <Image
+                source={dummyData.milkList[selectedMilkIndex].image}
+                resizeMode='contain'
+                style={styles.imageMilk}
+              />
 
-                            <IconButton
-                                icon={icons.rightArrow}
-                                containerStyle={{
-                                  marginRight: -15,
-                                  width: 25,
-                                  height: 25,
-                                  borderRadius: 3,
-                                  backgroundColor: COLORS.white
-                                }}
-                                iconStyle={{
-                                  width: 15,
-                                  height: 15,
-                                  tintColor: COLORS.black
-                                }}
-                                onPress={() => handleSwitchMilk('next')}
-                            />
-                        </View>
-
-                        <Text
-                            style={{
-                              marginTop: SIZES.base,
-                              color: appTheme.textColor,
-                              ...FONTS.body3
-                            }}
-                        >
-                            {dummyData.milkList[selectedMilkIndex].name}
-                        </Text>
-                        <Text
-                            style={{
-                              color: appTheme.textColor,
-                              ...FONTS.body3
-                            }}
-                        >
-                            {
-                                dummyData.milkList[selectedMilkIndex].price > 0
-                                  ? '+ ' + dummyData.milkList[selectedMilkIndex].price
-                                    .toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' đ'
-                                  : 'Less fat of drink'
-                            }
-                        </Text>
-                    </View>
-
-                    {/* Sweetness and Ice */}
-                    <View
-                        style={{
-                          flex: 1
-                        }}
-                    >
-                        {/* Sweetness adjust section */}
-                        <View
-                            style={{
-                              flex: 1,
-                              justifyContent: 'center',
-                              paddingHorizontal: SIZES.padding
-                            }}
-                        >
-                            <Text
-                                style={{
-                                  textAlign: 'center',
-                                  color: appTheme.headerColor,
-                                  ...FONTS.h2,
-                                  fontSize: 20
-                                }}
-                            >
-                                Sweetness
-                            </Text>
-                            <View
-                                style={{
-                                  flexDirection: 'row',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  height: '60%',
-                                  borderRadius: 15,
-                                  backgroundColor: COLORS.primary
-                                }}
-                            >
-                                {/* Reduce sweet button */}
-                                <IconButton
-                                    icon={icons.minus}
-                                    containerStyle={{
-                                      marginLeft: -8,
-                                      width: 25,
-                                      height: 25,
-                                      borderRadius: 3,
-                                      backgroundColor: COLORS.white
-                                    }}
-                                    iconStyle={{
-                                      tintColor: COLORS.black,
-                                      width: 15,
-                                      height: 15
-                                    }}
-                                    onPress={() => handleSwitchSweetnessLevel('-')}
-                                />
-
-                                {/* Percentage of sweetness */}
-                                <View
-                                    style={{
-                                      flex: 1,
-                                      alignItems: 'center',
-                                      justifyContent: 'center'
-                                    }}
-                                >
-                                    <Text
-                                        style={{
-                                          color: COLORS.white,
-                                          ...FONTS.h3
-                                        }}
-                                    >
-                                        {selectedSweetnessLevel}%
-                                    </Text>
-                                </View>
-
-                                {/* Increase sweet button */}
-                                <IconButton
-                                    icon={icons.add}
-                                    containerStyle={{
-                                      marginRight: -8,
-                                      width: 25,
-                                      height: 25,
-                                      borderRadius: 3,
-                                      backgroundColor: COLORS.white
-                                    }}
-                                    iconStyle={{
-                                      tintColor: COLORS.black,
-                                      width: 15,
-                                      height: 15
-                                    }}
-                                    onPress={() => handleSwitchSweetnessLevel('+')}
-                                />
-
-                            </View>
-                        </View>
-
-                        {/* Ice adjust section */}
-                        <View
-                            style={{
-                              flex: 1,
-                              justifyContent: 'center',
-                              paddingHorizontal: SIZES.padding
-                            }}
-                        >
-                            <Text
-                                style={{
-                                  textAlign: 'center',
-                                  color: appTheme.headerColor,
-                                  ...FONTS.h2,
-                                  fontSize: 20
-                                }}
-                            >
-                                Ice
-                            </Text>
-
-                            <View
-                                style={{
-                                  flexDirection: 'row',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  height: '60%',
-                                  borderRadius: 15,
-                                  backgroundColor: COLORS.primary
-                                }}
-                            >
-                                {/* Reduce ice button */}
-                                <IconButton
-                                    icon={icons.minus}
-                                    containerStyle={{
-                                      marginLeft: -8,
-                                      width: 25,
-                                      height: 25,
-                                      borderRadius: 3,
-                                      backgroundColor: COLORS.white
-                                    }}
-                                    iconStyle={{
-                                      tintColor: COLORS.black,
-                                      width: 15,
-                                      height: 15
-                                    }}
-                                    onPress={() => handleSwitchIceLevel('-')}
-                                />
-
-                                {/* Percentage of ice */}
-                                <View
-                                    style={{
-                                      flex: 1,
-                                      alignItems: 'center',
-                                      justifyContent: 'center'
-                                    }}
-                                >
-                                    <Text
-                                        style={{
-                                          color: COLORS.white,
-                                          ...FONTS.h3
-                                        }}
-                                    >
-                                        {selectedIceLevel}%
-                                    </Text>
-                                </View>
-
-                                {/* Add ice button */}
-                                <IconButton
-                                    icon={icons.add}
-                                    containerStyle={{
-                                      marginRight: -8,
-                                      width: 25,
-                                      height: 25,
-                                      borderRadius: 3,
-                                      backgroundColor: COLORS.white
-                                    }}
-                                    iconStyle={{
-                                      tintColor: COLORS.black,
-                                      width: 15,
-                                      height: 15
-                                    }}
-                                    onPress={() => handleSwitchIceLevel('+')}
-                                />
-
-                            </View>
-                        </View>
-                    </View>
-
-                </View>
-
+              <IconButton
+                icon={icons.rightArrow}
+                containerStyle={styles.iconMilkIncreaseContainer}
+                iconStyle={styles.iconMilkIncreaseStyle}
+                onPress={() => handleSwitchMilk('next')}
+              />
             </View>
+
+            <Text style={{ marginTop: SIZES.base, color: appTheme.textColor, ...FONTS.body3 }}>
+              {dummyData.milkList[selectedMilkIndex].name}
+            </Text>
+            <Text style={{ color: appTheme.textColor, ...FONTS.body3 }}>
+              {dummyData.milkList[selectedMilkIndex].price > 0
+                ? '+ ' + toFixedPrice(dummyData.milkList[selectedMilkIndex].price)
+                : 'Less fat of drink'}
+            </Text>
+          </View>
+
+          {/* Sweetness and Ice */}
+          <View style={{ flex: 1 }}>
+            {/* Sweetness adjust section */}
+            <View style={styles.viewSweetness}>
+              <Text style={{ color: appTheme.headerColor, ...styles.textSweetness }}>
+                Sweetness
+              </Text>
+                <View style={styles.viewSweetnessSection}>
+                  {/* Reduce sweet button */}
+                  <IconButton
+                    icon={icons.minus}
+                    containerStyle={styles.iconSweetnessReduceContainer}
+                    iconStyle={styles.iconSweetnessReduceStyle}
+                    onPress={() => handleSwitchSweetnessLevel('-')}
+                  />
+
+                  {/* Percentage of sweetness */}
+                  <View style={styles.viewSweetnessPercentage}>
+                    <Text style={styles.sweetnessPercentage}>
+                      {selectedSweetnessLevel}%
+                    </Text>
+                  </View>
+
+                  {/* Increase sweet button */}
+                  <IconButton
+                    icon={icons.add}
+                    containerStyle={styles.iconSweetnessIncreaseContainer}
+                    iconStyle={styles.iconSweetnessIncreaseStyle}
+                    onPress={() => handleSwitchSweetnessLevel('+')}
+                  />
+
+                </View>
+              </View>
+
+              {/* Ice adjust section */}
+              <View style={styles.viewIce}>
+                <Text style={{ color: appTheme.headerColor, ...styles.textIce }}>
+                  Ice
+                </Text>
+
+                <View style={styles.viewIceSection}>
+                  {/* Reduce ice button */}
+                  <IconButton
+                    icon={icons.minus}
+                    containerStyle={styles.iconIceReduceContainer}
+                    iconStyle={styles.iconIceReduceStyle}
+                    onPress={() => handleSwitchIceLevel('-')}
+                  />
+
+                  {/* Percentage of ice */}
+                  <View style={styles.viewIcePercentage}>
+                    <Text style={styles.textIcePercentage}>
+                      {selectedIceLevel}%
+                    </Text>
+                  </View>
+
+                  {/* Add ice button */}
+                  <IconButton
+                    icon={icons.add}
+                    containerStyle={styles.iconIceIncreaseContainer}
+                    iconStyle={styles.iconIceIncreaseStyle}
+                    onPress={() => handleSwitchIceLevel('+')}
+                  />
+
+                </View>
+              </View>
+            </View>
+
+          </View>
+
+      </View>
     )
   }
 
   return (
-        <View
-            style={{
-              flex: 1,
-              backgroundColor: appTheme.backgroundColor
-            }}
-        >
-            <ScrollView
-                contentContainerStyle={{
-                  flex: 1,
-                  paddingBottom: 250
-                }}
-            >
-                {/* Header */}
-                {renderHeaderSection()}
+    <View style={{ flex: 1, backgroundColor: appTheme.backgroundColor }}>
+      <ScrollView contentContainerStyle={{ flex: 1, paddingBottom: 250 }}>
+        {/* Header */}
+        {renderHeaderSection()}
 
-                {/* Details */}
-                {renderDetailSection()}
-            </ScrollView>
-        </View>
+        {/* Details */}
+        {renderDetailSection()}
+      </ScrollView>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  iconIceIncreaseStyle: {
+    tintColor: COLORS.black,
+    width: 15,
+    height: 15
+  },
+  iconIceIncreaseContainer: {
+    marginRight: -8,
+    width: 25,
+    height: 25,
+    borderRadius: 3,
+    backgroundColor: COLORS.white
+  },
+  textIcePercentage: {
+    color: COLORS.white,
+    ...FONTS.h3
+  },
+  viewIcePercentage: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  iconIceReduceStyle: {
+    tintColor: COLORS.black,
+    width: 15,
+    height: 15
+  },
+  iconIceReduceContainer: {
+    marginLeft: -8,
+    width: 25,
+    height: 25,
+    borderRadius: 3,
+    backgroundColor: COLORS.white
+  },
+  viewIceSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '60%',
+    borderRadius: 15,
+    backgroundColor: COLORS.primary
+  },
+  textIce: {
+    textAlign: 'center',
+    ...FONTS.h2,
+    fontSize: 20
+  },
+  viewIce: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: SIZES.padding
+  },
+  iconSweetnessIncreaseStyle: {
+    tintColor: COLORS.black,
+    width: 15,
+    height: 15
+  },
+  iconSweetnessIncreaseContainer: {
+    marginRight: -8,
+    width: 25,
+    height: 25,
+    borderRadius: 3,
+    backgroundColor: COLORS.white
+  },
+  sweetnessPercentage: {
+    color: COLORS.white,
+    ...FONTS.h3
+  },
+  viewSweetnessPercentage: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  iconSweetnessReduceStyle: {
+    tintColor: COLORS.black,
+    width: 15,
+    height: 15
+  },
+  iconSweetnessReduceContainer: {
+    marginLeft: -8,
+    width: 25,
+    height: 25,
+    borderRadius: 3,
+    backgroundColor: COLORS.white
+  },
+  viewSweetnessSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '60%',
+    borderRadius: 15,
+    backgroundColor: COLORS.primary
+  },
+  textSweetness: {
+    textAlign: 'center',
+    ...FONTS.h2,
+    fontSize: 20
+  },
+  viewSweetness: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: SIZES.padding
+  },
+  iconMilkIncreaseStyle: {
+    width: 15,
+    height: 15,
+    tintColor: COLORS.black
+  },
+  iconMilkIncreaseContainer: {
+    marginRight: -15,
+    width: 25,
+    height: 25,
+    borderRadius: 3,
+    backgroundColor: COLORS.white
+  },
+  imageMilk: {
+    flex: 1,
+    width: 80,
+    height: 80
+  },
+  iconMilkReduceStyle: {
+    width: 15,
+    height: 15,
+    tintColor: COLORS.black
+  },
+  iconMilkReduceContainer: {
+    marginLeft: -15,
+    width: 25,
+    height: 25,
+    borderRadius: 3,
+    backgroundColor: COLORS.white
+  },
+  viewMilkSection: {
+    flexDirection: 'row',
+    width: 100,
+    height: 100,
+    marginTop: SIZES.base,
+    alignItems: 'center',
+    borderRadius: SIZES.radius,
+    backgroundColor: COLORS.primary
+  },
+  viewMilk: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  viewHeader: {
+    width: '100%',
+    height: '55%',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  viewHeaderShape: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 40,
+    borderBottomLeftRadius: 100,
+    backgroundColor: COLORS.primary
+  },
+  headerIconButton: {
+    position: 'absolute',
+    top: 45,
+    left: 20,
+    padding: 10,
+    borderRadius: SIZES.radius,
+    backgroundColor: COLORS.black
+  },
+  viewDetail: {
+    flex: 1,
+    paddingHorizontal: 30,
+    justifyContent: 'space-between',
+    marginTop: SIZES.padding
+  },
+  viewSize: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: SIZES.radius
+  },
+  pickSizeText: {
+    ...FONTS.h2,
+    flex: 1,
+    fontSize: 20
+  },
+  viewCup: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  touchM: {
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  imageM: {
+    width: 80,
+    height: 80,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  textM: { ...FONTS.body3, color: COLORS.white },
+  touchL: {
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  imageL: {
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  textL: { ...FONTS.body3, color: COLORS.white },
+  viewBottom: {
+    flexDirection: 'row',
+    marginTop: SIZES.padding
+  }
+})
 
 function mapStateToProps (state) {
   return {

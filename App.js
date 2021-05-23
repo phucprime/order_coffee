@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Location, Order, OrderDetail } from './screens'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
@@ -20,41 +20,39 @@ const store = createStore(
 )
 
 const App = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     SplashScreen.hide()
   }, [])
 
   return (
-        <Provider store={store}>
-            <NavigationContainer>
-                <Stack.Navigator
-                    screenOptions={{
-                      headerShown: false
-                    }}
-                    initialRouteName={'Home'}
-                >
-                    <Stack.Screen
-                        name="Home"
-                        component={Tabs}
-                    />
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{ headerShown: false }}
+          initialRouteName={'Home'}
+        >
+          <Stack.Screen
+            name="Home"
+            component={Tabs}
+          />
 
-                    <Stack.Screen
-                        name="Location"
-                        component={Location}
-                    />
+          <Stack.Screen
+            name="Location"
+            component={Location}
+          />
 
-                    <Stack.Screen
-                        name="Order"
-                        component={Order}
-                    />
+          <Stack.Screen
+            name="Order"
+            component={Order}
+          />
 
-                    <Stack.Screen
-                        name="OrderDetail"
-                        component={OrderDetail}
-                    />
-                </Stack.Navigator>
-            </NavigationContainer>
-        </Provider>
+          <Stack.Screen
+            name="OrderDetail"
+            component={OrderDetail}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }
 
