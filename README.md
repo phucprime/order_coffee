@@ -1,4 +1,4 @@
-# Order Coffee Application
+# Order Coffee UI
 Order Coffee React Native Application (Product images: [`The Coffee House`](https://www.thecoffeehouse.com))
 
 ### Installation
